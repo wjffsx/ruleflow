@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/prometheus/client_golang v1.19.0
-	github.com/wjffsx/ruleflow v0.0.0
+	github.com/wjffsx/ruleflow v0.1.0
 )
 
 require (
@@ -17,5 +17,3 @@ require (
 	golang.org/x/sys v0.42.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
-
-replace github.com/wjffsx/ruleflow => ../../../..
