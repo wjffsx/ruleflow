@@ -3,9 +3,9 @@ package ext
 import (
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes/util"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes/util"
 )
 
 // ─────────────────────────────────────────────

@@ -1,8 +1,8 @@
 package engine
 
 import (
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/compiler"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/compiler"
 )
 
 // loadChain 加载并编译规则链（原子交换）。

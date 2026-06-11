@@ -33,7 +33,7 @@ Registry:
 ```go
 import (
     "context"
-    "github.com/vpptu/ruleflow/pkg/ruleflow/core"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 )
 
 // MaintenanceWindowCondition evaluates to true only within a configured time window.
@@ -79,7 +79,7 @@ func (a *WebhookAction) Execute(_ context.Context, data core.DataContext) error 
 ### Option A: Register individual factories
 
 ```go
-import "github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
+import "github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
 
 reg := nodes.NewEmptyRegistry()
 
@@ -130,9 +130,9 @@ reg.RegisterPackage(MyPackage{})
 
 ```go
 import (
-    "github.com/vpptu/ruleflow/pkg/ruleflow/core/engine"
-    "github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
-    "github.com/vpptu/ruleflow/pkg/ruleflow/builtin"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/core/engine"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/builtin"
 )
 
 reg := nodes.NewEmptyRegistry()

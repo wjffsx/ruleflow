@@ -1,8 +1,8 @@
 # RuleFlow
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/vpptu/ruleflow.svg)](https://pkg.go.dev/github.com/vpptu/ruleflow)
-[![CI](https://github.com/vpptu/ruleflow/actions/workflows/ci.yml/badge.svg)](https://github.com/vpptu/ruleflow/actions/workflows/ci.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/vpptu/ruleflow)](https://goreportcard.com/report/github.com/vpptu/ruleflow)
+[![Go Reference](https://pkg.go.dev/badge/github.com/wjffsx/ruleflow.svg)](https://pkg.go.dev/github.com/wjffsx/ruleflow)
+[![CI](https://github.com/wjffsx/ruleflow/actions/workflows/ci.yml/badge.svg)](https://github.com/wjffsx/ruleflow/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/wjffsx/ruleflow)](https://goreportcard.com/report/github.com/wjffsx/ruleflow)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
 **RuleFlow** is a high-performance, zero-allocation IoT rule engine written in Go. It compiles rule chains into function closures for sub-microsecond evaluation on the hot path, supports lock-free hot-reload via copy-on-write, and provides a pluggable contract layer for metrics, tracing, logging, rate limiting, and backpressure.
@@ -116,11 +116,11 @@ import (
     "context"
     "fmt"
 
-    "github.com/vpptu/ruleflow/pkg/ruleflow/core"
-    "github.com/vpptu/ruleflow/pkg/ruleflow/core/engine"
-    "github.com/vpptu/ruleflow/pkg/ruleflow/builtin/action"
-    "github.com/vpptu/ruleflow/pkg/ruleflow/builtin/condition"
-    "github.com/vpptu/ruleflow/pkg/ruleflow/datacontext"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/core/engine"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/action"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/condition"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/datacontext"
 )
 
 func main() {
@@ -197,7 +197,7 @@ chain:
 Then load it:
 
 ```go
-import "github.com/vpptu/ruleflow/pkg/ruleflow/config"
+import "github.com/wjffsx/ruleflow/pkg/ruleflow/config"
 
 // file watch mode
 watcher := config.NewFileWatcher("chain.yaml", loader)
@@ -278,7 +278,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development workflow, code convention
 ### Quick start for contributors
 
 ```bash
-git clone https://github.com/vpptu/ruleflow.git
+git clone https://github.com/wjffsx/ruleflow.git
 cd ruleflow
 go mod download
 go test -count=1 -race ./pkg/...

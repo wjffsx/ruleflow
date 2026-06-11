@@ -4,7 +4,7 @@
 //
 //	import (
 //	    "net/http"
-//	    ruleflowpprof "github.com/vpptu/ruleflow/pkg/ruleflow/contrib/pprof"
+//	    ruleflowpprof "github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/pprof"
 //	)
 //
 //	mux := http.NewServeMux()

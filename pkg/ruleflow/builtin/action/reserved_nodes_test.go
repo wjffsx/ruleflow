@@ -5,8 +5,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/builtin/action"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/action"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
 )
 
 // mockDataContext 用于测试的模拟 DataContext
@@ -46,8 +46,8 @@ func (m *mockDataContext) AddTarget(target string)     {}
 func (m *mockDataContext) Dropped() bool               { return false }
 func (m *mockDataContext) SetDropped(v bool)           {}
 func (m *mockDataContext) Timestamp() int64            { return 1000 }
-func (m *mockDataContext) SpanContext() core.SpanContext { return core.SpanContext{} }
-func (m *mockDataContext) SetSpanContext(sc core.SpanContext) {}
+func (m *mockDataContext) SpanContext() contract.SpanContext { return contract.SpanContext{} }
+func (m *mockDataContext) SetSpanContext(sc contract.SpanContext) {}
 func (m *mockDataContext) PreviousValue() (float64, bool) { return 0, false }
 func (m *mockDataContext) SetPreviousValue(v float64)  {}
 func (m *mockDataContext) Raw() any                    { return nil }

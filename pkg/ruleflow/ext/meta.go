@@ -18,7 +18,7 @@ package ext
 //   - extensions: VPP 业务特定节点
 
 import (
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
 )
 
 // ActionMetaList returns metadata for all ext action nodes.

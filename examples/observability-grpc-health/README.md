@@ -100,4 +100,4 @@ func (s *grpcHealthServer) Check(ctx context.Context, req *pb.HealthCheckRequest
 
 | 旧 import                                                    | 状态         | 替代                       |
 | ------------------------------------------------------------ | ------------ | -------------------------- |
-| `github.com/vpptu/ruleflow/pkg/ruleflow/contrib/health/grpc` | ⚠️ Deprecated | 本示例的 `HealthService`   |
+| `github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/health/grpc` | ⚠️ Deprecated | 本示例的 `HealthService`   |

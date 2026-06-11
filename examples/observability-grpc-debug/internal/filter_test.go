@@ -3,7 +3,7 @@ package debuginternal
 import (
 	"testing"
 
-	coredebug "github.com/vpptu/ruleflow/pkg/ruleflow/debug"
+	coredebug "github.com/wjffsx/ruleflow/pkg/ruleflow/debug"
 )
 
 func makeEvent(chainID, nodeID, relationType string) coredebug.DebugEvent {

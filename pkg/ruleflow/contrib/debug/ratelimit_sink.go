@@ -6,8 +6,8 @@
 // 基本用法：
 //
 //	import (
-//	    "github.com/vpptu/ruleflow/pkg/ruleflow/contrib/debug"
-//	    coredebug "github.com/vpptu/ruleflow/pkg/ruleflow/debug"
+//	    "github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/debug"
+//	    coredebug "github.com/wjffsx/ruleflow/pkg/ruleflow/debug"
 //	)
 //
 //	bus := debug.NewChannelSink(1024)
@@ -17,11 +17,10 @@
 package debug
 
 import (
-	"context"
 	"sync/atomic"
 	"time"
 
-	coredebug "github.com/vpptu/ruleflow/pkg/ruleflow/debug"
+	coredebug "github.com/wjffsx/ruleflow/pkg/ruleflow/debug"
 )
 
 // RateLimitSink 包装 sink，限制每秒事件数
@@ -51,7 +50,7 @@ func NewRateLimitSink(inner coredebug.DebugSink, perSec int) *RateLimitSink {
 }
 
 // WriteEvent 实现 DebugSink 接口
-func (s *RateLimitSink) WriteEvent(ctx context.Context, event coredebug.DebugEvent) error {
+func (s *RateLimitSink) WriteEvent(ctx any, event coredebug.DebugEvent) error {
 	if s.limit > 0 {
 		now := time.Now().Unix()
 		lastSec := s.curSec.Load()

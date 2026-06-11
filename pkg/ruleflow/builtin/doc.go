@@ -8,6 +8,6 @@
 //
 // Use the sub-packages directly:
 //
-//	import "github.com/vpptu/ruleflow/pkg/ruleflow/builtin/condition"
-//	import "github.com/vpptu/ruleflow/pkg/ruleflow/builtin/action"
+//	import "github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/condition"
+//	import "github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/action"
 package builtin

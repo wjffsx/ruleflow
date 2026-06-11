@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/extensions/types"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/extensions/types"
 )
 
 // ─────────────────────────────────────────────

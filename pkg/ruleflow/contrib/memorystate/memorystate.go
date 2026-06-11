@@ -6,7 +6,7 @@
 //
 // 基本用法：
 //
-//	import "github.com/vpptu/ruleflow/pkg/ruleflow/contrib/memorystate"
+//	import "github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/memorystate"
 //
 //	store := memorystate.NewMapStateStore()
 //	eng := engine.NewEngine(engine.WithStateStore(store))

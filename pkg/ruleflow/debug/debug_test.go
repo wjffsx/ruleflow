@@ -6,6 +6,8 @@ import (
 	"sync/atomic"
 	"testing"
 	"time"
+
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
 )
 
 // ─────────────────────────────────────────────
@@ -18,7 +20,7 @@ type mockSink struct {
 	count  atomic.Int64
 }
 
-func (s *mockSink) WriteEvent(_ context.Context, event DebugEvent) error {
+func (s *mockSink) WriteEvent(_ any, event DebugEvent) error {
 	s.mu.Lock()
 	s.events = append(s.events, event)
 	s.mu.Unlock()
@@ -116,8 +118,8 @@ func TestDeadlineAutoDisable(t *testing.T) {
 	}
 
 	// 调用 Capture 触发 deadline 过期自动关闭
-	dm.Capture(context.Background(), DebugEvent{
-		EventType:    EventIn,
+	dm.Capture(context.Background(), contract.DebugEvent{
+		EventType:    contract.DebugEventIn,
 		ChainID:      "test",
 		RelationType: "matched",
 	})

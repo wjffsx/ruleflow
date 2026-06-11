@@ -3,8 +3,8 @@ package config
 import (
 	"testing"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/builtin"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
 )
 
 var reg = func() *nodes.Registry {

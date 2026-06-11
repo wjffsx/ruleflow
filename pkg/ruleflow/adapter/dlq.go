@@ -3,7 +3,7 @@ package adapter
 import (
 	"context"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 )
 
 // ─────────────────────────────────────────────

@@ -10,7 +10,7 @@
 //
 // 基本用法：
 //
-//	import "github.com/vpptu/ruleflow/pkg/ruleflow/contrib/memorysink"
+//	import "github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/memorysink"
 //
 //	sink := memorysink.NewMemorySink()
 //	engine := core.NewEngine(core.WithMetricsSink(sink))
@@ -29,7 +29,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
 )
 
 // Snapshot MemorySink 的线程安全快照

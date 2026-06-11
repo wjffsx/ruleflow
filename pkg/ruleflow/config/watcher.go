@@ -20,9 +20,9 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
 )
 
 // ─────────────────────────────────────────────

@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/contrib/memorysink"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/engine"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/memorysink"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/engine"
 )
 
 // ─────────────────────────────────────────────

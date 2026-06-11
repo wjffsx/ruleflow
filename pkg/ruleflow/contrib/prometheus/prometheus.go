@@ -5,7 +5,7 @@
 //
 // 基本用法:
 //
-//	import "github.com/vpptu/ruleflow/pkg/ruleflow/contrib/prometheus"
+//	import "github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/prometheus"
 //
 //	sink := prometheus.NewPrometheusSink()
 //	engine := ruleflow.NewEngine(ruleflow.WithMetricsSink(sink))
@@ -22,7 +22,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
 )
 
 // ─────────────────────────────────────────────

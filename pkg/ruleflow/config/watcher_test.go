@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/builtin"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
 )
 
 // stubLoader 记录 Apply 调用次数

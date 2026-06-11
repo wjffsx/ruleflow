@@ -15,7 +15,7 @@ Thank you for considering contributing to RuleFlow. This document outlines the d
 ### Clone and build
 
 ```bash
-git clone https://github.com/vpptu/ruleflow.git
+git clone https://github.com/wjffsx/ruleflow.git
 cd ruleflow
 go mod download
 go build ./...

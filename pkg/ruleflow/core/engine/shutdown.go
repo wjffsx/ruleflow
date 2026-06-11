@@ -6,7 +6,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
 )
 
 // shutdown 优雅关闭管理器（引擎内部实现）

@@ -1,10 +1,10 @@
-module github.com/vpptu/ruleflow/pkg/ruleflow/contrib/prometheus
+module github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/prometheus
 
 go 1.25.0
 
 require (
 	github.com/prometheus/client_golang v1.19.0
-	github.com/vpptu/ruleflow v0.0.0
+	github.com/wjffsx/ruleflow v0.0.0
 )
 
 require (
@@ -18,4 +18,4 @@ require (
 	google.golang.org/protobuf v1.36.11 // indirect
 )
 
-replace github.com/vpptu/ruleflow => ../../../..
+replace github.com/wjffsx/ruleflow => ../../../..

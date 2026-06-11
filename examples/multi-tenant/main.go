@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/contrib/tokenbucket"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/engine"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/datacontext"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/tokenbucket"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/engine"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/datacontext"
 )
 
 // simpleLimiter 按 tenant 限流的薄包装

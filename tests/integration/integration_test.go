@@ -21,9 +21,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/config"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/config"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
 )
 
 // ─────────────────────────────────────────────

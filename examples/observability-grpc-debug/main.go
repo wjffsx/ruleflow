@@ -23,9 +23,9 @@ import (
 	"net"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/contrib/debug"
-	coredebug "github.com/vpptu/ruleflow/pkg/ruleflow/debug"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/engine"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/debug"
+	coredebug "github.com/wjffsx/ruleflow/pkg/ruleflow/debug"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/engine"
 
 	"google.golang.org/grpc"
 )
@@ -147,14 +147,18 @@ func (s *debugServer) SetDebugMode(_ context.Context, req *SetDebugModeRequest) 
 	if dm == nil {
 		return SetDebugModeResponse{Success: false}, nil
 	}
+	debugMgr, ok := dm.(*coredebug.DebugManager)
+	if !ok {
+		return SetDebugModeResponse{Success: false}, nil
+	}
 	// allDeadline 留零值，模式立即生效
 	switch req.Mode {
 	case "off":
-		dm.SetMode(coredebug.DebugOff, time.Time{})
+		debugMgr.SetMode(coredebug.DebugOff, time.Time{})
 	case "failures":
-		dm.SetMode(coredebug.DebugFailures, time.Time{})
+		debugMgr.SetMode(coredebug.DebugFailures, time.Time{})
 	case "all":
-		dm.SetMode(coredebug.DebugAll, time.Time{})
+		debugMgr.SetMode(coredebug.DebugAll, time.Time{})
 	default:
 		return SetDebugModeResponse{Success: false}, nil
 	}

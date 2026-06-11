@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/adapter"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/adapter"
 )
 
 // ─────────────────────────────────────────────

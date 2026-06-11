@@ -2,10 +2,10 @@
 package extensions
 
 import (
-	"github.com/vpptu/ruleflow/pkg/ruleflow/extensions/action"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/extensions/condition"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/extensions/flow"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/extensions/action"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/extensions/condition"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/extensions/flow"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
 )
 
 // Package VPP node package for registry registration

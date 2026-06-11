@@ -15,7 +15,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 )
 
 // ConditionFactory condition factory function

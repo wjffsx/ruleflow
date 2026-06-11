@@ -6,8 +6,8 @@
 // 使用示例：
 //
 //	import (
-//	    ruleflow "github.com/vpptu/ruleflow/pkg/ruleflow/core"
-//	    tb "github.com/vpptu/ruleflow/pkg/ruleflow/contrib/ratelimit/tokenbucket"
+//	    ruleflow "github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+//	    tb "github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/ratelimit/tokenbucket"
 //	)
 //
 //	// 共享一个全局限流器：每秒 1000 个令牌，桶容量 2000
@@ -23,7 +23,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
 )
 
 // TokenBucket 内存令牌桶（线程安全）

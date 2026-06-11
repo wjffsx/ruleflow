@@ -21,8 +21,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
 )
 
 // ─────────────────────────────────────────────

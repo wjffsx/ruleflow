@@ -1,6 +1,5 @@
 # Go
 *.test
-*.test
 *.out
 coverage.txt
 coverage.html
@@ -18,3 +17,4 @@ Thumbs.db
 # Build artifacts
 bin/
 dist/
+*.exe

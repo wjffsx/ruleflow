@@ -198,9 +198,9 @@ condition:
 
 ```go
 import (
-    "github.com/vpptu/ruleflow/pkg/ruleflow/config"
-    "github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
-    "github.com/vpptu/ruleflow/pkg/ruleflow/builtin"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/config"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
+    "github.com/wjffsx/ruleflow/pkg/ruleflow/builtin"
 )
 
 reg := nodes.NewEmptyRegistry()

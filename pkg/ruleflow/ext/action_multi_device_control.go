@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 )
 
 // ─────────────────────────────────────────────

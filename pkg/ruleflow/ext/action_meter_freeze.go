@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 )
 
 // ─────────────────────────────────────────────
@@ -55,7 +55,7 @@ func (a *MeterFreezeAction) Execute(_ context.Context, data core.DataContext) er
 	// 检查是否需要冻结
 	if a.FreezeType == "periodic" && a.Period > 0 {
 		// 周期冻结：检查上次冻结时间
-		lastValue, lastTs, ok := a.Storage.GetLastFreeze(deviceID, pointName)
+		_, lastTs, ok := a.Storage.GetLastFreeze(deviceID, pointName)
 		if ok {
 			elapsed := ts - lastTs
 			if elapsed < a.Period.Milliseconds() {

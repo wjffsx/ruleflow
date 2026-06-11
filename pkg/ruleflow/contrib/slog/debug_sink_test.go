@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"testing"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/debug"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/debug"
 )
 
 func TestDebugLogSink_WriteEvent(t *testing.T) {

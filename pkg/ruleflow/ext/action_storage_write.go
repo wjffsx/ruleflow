@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 )
 
 // ─────────────────────────────────────────────

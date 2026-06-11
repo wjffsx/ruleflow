@@ -6,7 +6,7 @@
 //
 // 基本用法：
 //
-//	import "github.com/vpptu/ruleflow/pkg/ruleflow/contrib/slog"
+//	import "github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/slog"
 //
 //	mgr := debug.NewDebugManager(debug.DebugOn, slog.NewDebugLogSinkDefault(), ...)
 package slog
@@ -17,7 +17,7 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/debug"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/debug"
 )
 
 // DebugLogSink 基于 slog 的调试事件输出。
@@ -43,12 +43,16 @@ func NewDebugLogSinkDefault() *DebugLogSink {
 }
 
 // WriteEvent 实现 debug.DebugSink 接口。
-func (s *DebugLogSink) WriteEvent(ctx context.Context, event debug.DebugEvent) error {
+func (s *DebugLogSink) WriteEvent(ctx any, event debug.DebugEvent) error {
 	data, err := json.Marshal(event)
 	if err != nil {
 		return err
 	}
-	s.logger.LogAttrs(ctx, slog.LevelDebug, "ruleflow.debug",
+	lctx := context.Background()
+	if c, ok := ctx.(context.Context); ok {
+		lctx = c
+	}
+	s.logger.LogAttrs(lctx, slog.LevelDebug, "ruleflow.debug",
 		slog.String("event", string(data)),
 		slog.String("chain_id", event.ChainID),
 		slog.String("rule_id", event.RuleID),

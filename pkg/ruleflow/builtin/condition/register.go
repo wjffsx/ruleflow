@@ -5,11 +5,10 @@ package condition
 
 import (
 	"fmt"
-	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/builtin/condition/stateful"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes/util"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/condition/stateful"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes/util"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 )
 
 // GetFactories 返回所有内置条件节点的工厂函数

@@ -179,5 +179,5 @@ func (s *debugServer) SetDebugMode(_ context.Context, req *pb.SetDebugModeReques
 
 | 旧 import                                                | 状态         | 替代                       |
 | -------------------------------------------------------- | ------------ | -------------------------- |
-| `github.com/vpptu/ruleflow/pkg/ruleflow/contrib/debug/grpc` | ⚠️ Deprecated | 本示例的 `DebugService`   |
-| `github.com/vpptu/ruleflow/pkg/ruleflow/contrib/debug/sse`  | ⚠️ Deprecated | 应用层 SSE/WebSocket    |
+| `github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/debug/grpc` | ⚠️ Deprecated | 本示例的 `DebugService`   |
+| `github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/debug/sse`  | ⚠️ Deprecated | 应用层 SSE/WebSocket    |

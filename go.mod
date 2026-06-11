@@ -1,8 +1,8 @@
-module github.com/vpptu/ruleflow
+module github.com/wjffsx/ruleflow
 
 go 1.25.0
 
-require github.com/vpptu/ruleflow/pkg/ruleflow/config v0.0.0
+require github.com/wjffsx/ruleflow/pkg/ruleflow/config v0.0.0
 
 require google.golang.org/grpc v1.81.1
 
@@ -17,10 +17,10 @@ require (
 )
 
 replace (
-	github.com/vpptu/ruleflow/pkg/ruleflow/adapter => ./pkg/ruleflow/adapter
-	github.com/vpptu/ruleflow/pkg/ruleflow/config => ./pkg/ruleflow/config
-	github.com/vpptu/ruleflow/pkg/ruleflow/contrib/circuitbreaker => ./pkg/ruleflow/contrib/circuitbreaker
-	github.com/vpptu/ruleflow/pkg/ruleflow/contrib/otel => ./pkg/ruleflow/contrib/otel
-	github.com/vpptu/ruleflow/pkg/ruleflow/contrib/prometheus => ./pkg/ruleflow/contrib/prometheus
-	github.com/vpptu/ruleflow/pkg/ruleflow/ext => ./pkg/ruleflow/ext
+	github.com/wjffsx/ruleflow/pkg/ruleflow/adapter => ./pkg/ruleflow/adapter
+	github.com/wjffsx/ruleflow/pkg/ruleflow/config => ./pkg/ruleflow/config
+	github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/circuitbreaker => ./pkg/ruleflow/contrib/circuitbreaker
+	github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/otel => ./pkg/ruleflow/contrib/otel
+	github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/prometheus => ./pkg/ruleflow/contrib/prometheus
+	github.com/wjffsx/ruleflow/pkg/ruleflow/ext => ./pkg/ruleflow/ext
 )

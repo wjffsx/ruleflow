@@ -2,7 +2,7 @@
 //
 // 基本用法：
 //
-//	import "github.com/vpptu/ruleflow/pkg/ruleflow/contrib/slog"
+//	import "github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/slog"
 //
 //	engine := core.NewEngine(core.WithLogger(slog.NewSlogLoggerDefault()))
 //
@@ -16,7 +16,7 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
 )
 
 // SlogLogger 包装 *slog.Logger 以适配 ruleflow Logger 接口。

@@ -98,4 +98,4 @@ func livenessHandler(hc health.LivenessChecker) http.HandlerFunc {
 
 | 旧 import                                                              | 状态         | 替代                                       |
 | ---------------------------------------------------------------------- | ------------ | ------------------------------------------ |
-| `github.com/vpptu/ruleflow/pkg/ruleflow/contrib/observability/httphealth` | ⚠️ Deprecated | 本示例（5-10 行/handler）                  |
+| `github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/observability/httphealth` | ⚠️ Deprecated | 本示例（5-10 行/handler）                  |

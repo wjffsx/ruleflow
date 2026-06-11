@@ -8,11 +8,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/builtin"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/config"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/engine"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/datacontext"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/config"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/engine"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/datacontext"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
 )
 
 // chainYAML 是典型 IoT 网关规则链定义

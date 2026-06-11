@@ -13,10 +13,9 @@
 package debug
 
 import (
-	"context"
 	"sync/atomic"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/debug"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/debug"
 )
 
 // ChannelSink 带缓冲的非阻塞 channel sink（V4.10 替代 EventBus）
@@ -40,7 +39,7 @@ func NewChannelSink(bufferSize int) *ChannelSink {
 // WriteEvent 实现 debug.DebugSink 接口（引擎热路径调用）
 //
 // 非阻塞写入：buffer 满时丢弃事件，绝不阻塞引擎评估热路径。
-func (b *ChannelSink) WriteEvent(_ context.Context, event debug.DebugEvent) error {
+func (b *ChannelSink) WriteEvent(ctx any, event debug.DebugEvent) error {
 	select {
 	case b.ch <- event:
 		b.sent.Add(1)

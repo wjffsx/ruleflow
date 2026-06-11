@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/builtin/action"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/builtin/condition"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/engine"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/action"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/condition"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/engine"
 )
 
 // simpleDataPoint 简单的 DataContext 实现，用于示例

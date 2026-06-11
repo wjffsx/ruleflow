@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	coredebug "github.com/vpptu/ruleflow/pkg/ruleflow/debug"
+	coredebug "github.com/wjffsx/ruleflow/pkg/ruleflow/debug"
 )
 
 // V4.10 重命名：原 EventBus_* 测试 → ChannelSink_*
@@ -172,7 +172,7 @@ type recordingSink struct {
 	count int64
 }
 
-func (r *recordingSink) WriteEvent(_ context.Context, _ coredebug.DebugEvent) error {
+func (r *recordingSink) WriteEvent(_ any, _ coredebug.DebugEvent) error {
 	r.count++
 	return nil
 }

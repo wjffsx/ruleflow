@@ -9,7 +9,7 @@
 package debuginternal
 
 import (
-	coredebug "github.com/vpptu/ruleflow/pkg/ruleflow/debug"
+	coredebug "github.com/wjffsx/ruleflow/pkg/ruleflow/debug"
 )
 
 // SubscribeFilter 服务端过滤条件

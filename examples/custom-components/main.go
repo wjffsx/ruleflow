@@ -11,9 +11,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/engine"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/datacontext"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/engine"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/datacontext"
 )
 
 // ─────────────────────────────────────────────

@@ -6,8 +6,8 @@
 //
 //	import (
 //	    "go.opentelemetry.io/otel/trace"
-//	    "github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
-//	    "github.com/vpptu/ruleflow/contrib/otel"
+//	    "github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
+//	    "github.com/wjffsx/ruleflow/contrib/otel"
 //	)
 //
 //	// otel.SpanContext → contract.SpanContext
@@ -25,7 +25,7 @@
 package otel
 
 import (
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
 
 	oteltrace "go.opentelemetry.io/otel/trace"
 )

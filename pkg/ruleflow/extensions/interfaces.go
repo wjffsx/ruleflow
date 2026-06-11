@@ -9,7 +9,7 @@
 package extensions
 
 import (
-	"github.com/vpptu/ruleflow/pkg/ruleflow/extensions/types"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/extensions/types"
 )
 
 // MultiDataContextInterface multi-data-point context interface (alias for types.MultiDataContextInterface)

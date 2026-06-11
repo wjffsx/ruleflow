@@ -3,7 +3,7 @@ package otel
 import (
 	"context"
 
-	"github.com/vpptu/ruleflow/pkg/ruleflow/core/contract"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core/contract"
 
 	oteltrace "go.opentelemetry.io/otel/trace"
 )
@@ -14,8 +14,8 @@ import (
 //
 //	import (
 //	    otel "go.opentelemetry.io/otel"
-//	    "github.com/vpptu/ruleflow/contrib/otel"
-//	    "github.com/vpptu/ruleflow/core/engine"
+//	    "github.com/wjffsx/ruleflow/contrib/otel"
+//	    "github.com/wjffsx/ruleflow/core/engine"
 //	)
 //
 //	eng := engine.NewEngine(

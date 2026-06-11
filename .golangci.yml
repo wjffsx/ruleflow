@@ -56,7 +56,7 @@ linters-settings:
       - name: package-comments
         disabled: true  # 内部包不需要每个都有注释
   goimports:
-    local-prefixes: github.com/vpptu/ruleflow
+    local-prefixes: github.com/wjffsx/ruleflow
 
 issues:
   exclude-rules:

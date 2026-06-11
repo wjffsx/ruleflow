@@ -2,9 +2,9 @@
 package builtin
 
 import (
-	"github.com/vpptu/ruleflow/pkg/ruleflow/builtin/action"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/builtin/condition"
-	"github.com/vpptu/ruleflow/pkg/ruleflow/nodes"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/action"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/condition"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
 )
 
 // Package builtin node package for registry registration
