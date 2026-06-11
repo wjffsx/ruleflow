@@ -1,2 +1,6 @@
 github.com/expr-lang/expr v1.17.8 h1:W1loDTT+0PQf5YteHSTpju2qfUfNoBt4yw9+wOEU9VM=
 github.com/expr-lang/expr v1.17.8/go.mod h1:8/vRC7+7HBzESEqt5kKpYXxrxkr31SaO8r40VO/1IT4=
+github.com/wjffsx/ruleflow v0.1.0 h1:fHdDslaHCGvJ/ZglxBUCitrANtL6ZJuKUuj4/PKoP5E=
+github.com/wjffsx/ruleflow v0.1.0/go.mod h1:jqhDNq4qYzDTEV6Q+V9dOLlfLMsVx6qF5dIlMrlq1cQ=
+github.com/wjffsx/ruleflow/pkg/ruleflow/adapter v0.1.0 h1:DpjcZzEfEPEl0psslaXwjIPsnOWNgRpW8bjNQA5DYw0=
+github.com/wjffsx/ruleflow/pkg/ruleflow/adapter v0.1.0/go.mod h1:DOVMls25nj2QIeIFpTT0xhBtluEfC0Dgk+T0bFOezno=
