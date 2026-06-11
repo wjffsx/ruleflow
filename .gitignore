@@ -4,6 +4,7 @@
 coverage.txt
 coverage.html
 bench.txt
+go.sum
 
 # IDE
 .vscode/
