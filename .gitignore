@@ -1,0 +1,20 @@
+# Go
+*.test
+*.test
+*.out
+coverage.txt
+coverage.html
+bench.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+bin/
+dist/
