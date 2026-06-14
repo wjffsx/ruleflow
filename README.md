@@ -7,6 +7,8 @@
 
 **RuleFlow** is a high-performance, zero-allocation IoT rule engine written in Go. It compiles rule chains into function closures for sub-microsecond evaluation on the hot path, supports lock-free hot-reload via copy-on-write, and provides a pluggable contract layer for metrics, tracing, logging, rate limiting, and backpressure.
 
+English | [中文](README_zh.md)
+
 ---
 
 ## Features
