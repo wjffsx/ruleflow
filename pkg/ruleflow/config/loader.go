@@ -21,12 +21,14 @@ type ChainMeta struct {
 	Name        string `yaml:"name" json:"name"`
 	Description string `yaml:"description,omitempty" json:"description,omitempty"`
 	Root        bool   `yaml:"root" json:"root"`
+	Enabled     bool   `yaml:"enabled" json:"enabled"`
 	Version     int    `yaml:"version" json:"version"`
 	Status      string `yaml:"status" json:"status"`
 	// ★ Phase 1 新增
-	PipelineType string                 `yaml:"pipeline_type,omitempty" json:"pipeline_type,omitempty"`
-	Inputs       []InputConfig          `yaml:"inputs,omitempty" json:"inputs,omitempty"`
-	Outputs      []core.RuleChainOutput `yaml:"outputs,omitempty" json:"outputs,omitempty"`
+	PipelineType    string                 `yaml:"pipeline_type,omitempty" json:"pipeline_type,omitempty"`
+	EvaluationMode  string                 `yaml:"evaluation_mode,omitempty" json:"evaluation_mode,omitempty"`
+	Inputs          []InputConfig          `yaml:"inputs,omitempty" json:"inputs,omitempty"`
+	Outputs         []core.RuleChainOutput `yaml:"outputs,omitempty" json:"outputs,omitempty"`
 }
 
 // ★ Phase 1 新增: InputConfig 输入配置
