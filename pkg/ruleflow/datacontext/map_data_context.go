@@ -105,6 +105,13 @@ func (m *MapDataContext) DeviceID() string { return m.deviceID }
 // PointName 返回数据点名称
 func (m *MapDataContext) PointName() string { return m.pointName }
 
+// SetPointName 设置数据点名称（线程安全）
+func (m *MapDataContext) SetPointName(name string) {
+	m.mu.Lock()
+	m.pointName = name
+	m.mu.Unlock()
+}
+
 // PointType 返回数据点类型
 func (m *MapDataContext) PointType() string { return m.pointType }
 
@@ -126,10 +133,18 @@ func (m *MapDataContext) SetValue(v float64) {
 }
 
 // Quality 返回质量码
-func (m *MapDataContext) Quality() int { return m.quality }
+func (m *MapDataContext) Quality() int {
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	return m.quality
+}
 
 // SetQuality 设置质量码
-func (m *MapDataContext) SetQuality(q int) { m.quality = q }
+func (m *MapDataContext) SetQuality(q int) {
+	m.mu.Lock()
+	m.quality = q
+	m.mu.Unlock()
+}
 
 // UpperLimit 返回上限（无配置时返回 0, false）
 func (m *MapDataContext) UpperLimit() (float64, bool) { return 0, false }
@@ -158,10 +173,16 @@ func (m *MapDataContext) SetTag(key, value string) {
 }
 
 // TargetCount 返回目标数量
-func (m *MapDataContext) TargetCount() int { return len(m.targets) }
+func (m *MapDataContext) TargetCount() int {
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	return len(m.targets)
+}
 
 // TargetAt 返回第 i 个目标
 func (m *MapDataContext) TargetAt(i int) string {
+	m.mu.RLock()
+	defer m.mu.RUnlock()
 	if i < 0 || i >= len(m.targets) {
 		return ""
 	}
@@ -176,10 +197,18 @@ func (m *MapDataContext) AddTarget(target string) {
 }
 
 // Dropped 返回是否被丢弃
-func (m *MapDataContext) Dropped() bool { return m.dropped }
+func (m *MapDataContext) Dropped() bool {
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	return m.dropped
+}
 
 // SetDropped 设置丢弃标志
-func (m *MapDataContext) SetDropped(v bool) { m.dropped = v }
+func (m *MapDataContext) SetDropped(v bool) {
+	m.mu.Lock()
+	m.dropped = v
+	m.mu.Unlock()
+}
 
 // Timestamp 返回时间戳
 func (m *MapDataContext) Timestamp() int64 {

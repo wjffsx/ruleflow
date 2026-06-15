@@ -2,6 +2,7 @@ package engine
 
 import (
 	"context"
+	"strconv"
 	"sync/atomic"
 	"time"
 
@@ -121,9 +122,7 @@ func (e *Engine) evalChain(ctx context.Context, chainID string, data core.DataCo
 	atomic.AddInt64(&e.activeEval, 1)
 	e.metricsSink.SetActiveEval(atomic.LoadInt64(&e.activeEval))
 
-	result = &EvalResult{
-		MatchedRules: make([]*core.Rule, 0, len(chain.SortedRules)),
-	}
+	result = e.newEvalResult(len(chain.SortedRules))
 
 	// 按优先级评估规则
 	for _, cr := range chain.SortedRules {
@@ -343,6 +342,7 @@ func (e *Engine) consultErrorHandler(ctx context.Context, chainID, ruleID, actio
 // savePreviousValue 保存当前值作为下次评估的前值。
 func (e *Engine) savePreviousValue(data core.DataContext) {
 	data.SetPreviousValue(data.Value())
+	data.SetTag("_prev_timestamp", strconv.FormatInt(data.Timestamp(), 10))
 }
 
 // executeWithGuard 动作执行保护（超时 + panic recovery）。

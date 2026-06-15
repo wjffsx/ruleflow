@@ -43,6 +43,7 @@ func newMock() *mockData {
 
 func (m *mockData) DeviceID() string                       { return m.deviceID }
 func (m *mockData) PointName() string                      { return m.pointName }
+func (m *mockData) SetPointName(name string)               { m.pointName = name }
 func (m *mockData) PointType() string                      { return m.pointType }
 func (m *mockData) FQN() string                            { return m.deviceID + "/" + m.pointName }
 func (m *mockData) Value() float64                         { return m.value }
@@ -122,11 +123,16 @@ func TestTransformAction_NoOp(t *testing.T) {
 func TestRenameAction(t *testing.T) {
 	a := NewRenameAction("a1", "new_name")
 	data := newMock()
+	originalName := data.PointName()
 	if err := a.Execute(context.Background(), data); err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	if data.GetTag("_rename") != "new_name" {
-		t.Errorf("expected tag _rename=new_name, got %s", data.GetTag("_rename"))
+	// 验证 PointName 已被修改
+	if data.PointName() != "new_name" {
+		t.Errorf("expected PointName=new_name, got %s", data.PointName())
+	}
+	if data.PointName() == originalName {
+		t.Error("PointName should have been changed")
 	}
 }
 

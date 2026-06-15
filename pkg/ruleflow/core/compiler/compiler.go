@@ -21,13 +21,31 @@ var FastPathActionTypes = map[string]bool{
 	"drop": true, "route": true, "limit_check": true, "quality_mark": true,
 }
 
-// FastPathConditionTypes FastPath 兼容的条件类型（< 100ns，或零分配且 < 500ns）
+// fastPathConditionTypes FastPath 兼容的条件类型（< 100ns，或零分配且 < 500ns）
 // fqn_prefix 通过 DataContext.FQN() 预计算缓存实现零分配，约 427ns，归为 FastPath
 // value_in 通过预编译 map[float64]struct{} 实现 O(1) 查找，归为 FastPath
-var FastPathConditionTypes = map[string]bool{
+var fastPathConditionTypes = map[string]bool{
 	"device_type": true, "point_name": true, "point_name_pattern": true,
 	"value_range": true, "quality": true, "limit_exceeded": true,
 	"device_id": true, "fqn_prefix": true, "value_in": true,
+}
+
+// FastPathConditionTypes 保留公开只读访问（向后兼容）
+var FastPathConditionTypes = fastPathConditionTypes
+
+// IsFastPathCondition 判断条件类型是否属于 FastPath
+func IsFastPathCondition(typeName string) bool {
+	return fastPathConditionTypes[typeName]
+}
+
+// RegisterFastPathCondition 注册新的 FastPath 条件类型
+func RegisterFastPathCondition(typeName string) {
+	fastPathConditionTypes[typeName] = true
+}
+
+// UnregisterFastPathCondition 取消注册 FastPath 条件类型
+func UnregisterFastPathCondition(typeName string) {
+	delete(fastPathConditionTypes, typeName)
 }
 
 // MaxActionChainLength 动作链最大长度（防止死循环）

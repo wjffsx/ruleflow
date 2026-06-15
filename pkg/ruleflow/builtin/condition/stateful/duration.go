@@ -10,6 +10,20 @@ import (
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes/util"
 )
 
+// TimestampUnitThreshold 时间戳单位判断阈值
+// 2020-01-01 的毫秒时间戳 ≈ 1.58e12
+// 2020-01-01 的纳秒时间戳 ≈ 1.58e18
+// 阈值设为 1e15（远大于毫秒范围，远小于纳秒范围）
+const TimestampUnitThreshold = 1e15
+
+// normalizeTimestamp 将时间戳转换为 time.Time
+func normalizeTimestamp(ts int64) time.Time {
+	if ts > TimestampUnitThreshold {
+		return time.Unix(0, ts) // 纳秒
+	}
+	return time.UnixMilli(ts) // 毫秒
+}
+
 // ─────────────────────────────────────────────
 //  DurationCondition — 持续时间条件
 // ─────────────────────────────────────────────
@@ -35,10 +49,7 @@ func (c *DurationCondition) Evaluate(ctx context.Context, data core.DataContext)
 	key := util.StateKey("duration", c.IDValue, data.DeviceID(), data.PointName())
 	innerResult := c.Inner.Evaluate(ctx, data)
 
-	now := time.Unix(0, data.Timestamp())
-	if data.Timestamp() > 1e18 {
-		now = time.UnixMilli(data.Timestamp())
-	}
+	now := normalizeTimestamp(data.Timestamp())
 
 	if innerResult {
 		stateI, loaded := sd.StateStore().Get(key)

@@ -37,6 +37,7 @@ func newMemDC(deviceID, pointName string, value float64) *memDataContext {
 
 func (m *memDataContext) DeviceID() string                      { return m.deviceID }
 func (m *memDataContext) PointName() string                     { return m.pointName }
+func (m *memDataContext) SetPointName(name string)              { m.pointName = name }
 func (m *memDataContext) PointType() string                     { return "analog" }
 func (m *memDataContext) FQN() string                           { return m.deviceID + "/" + m.pointName }
 func (m *memDataContext) Value() float64                        { return m.value }

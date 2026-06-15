@@ -1,10 +1,10 @@
 // Package nodes provides the node registry with on-demand registration.
 //
-// V7 Refactoring:
-//   - Moved from registry/registry.go to nodes/registry.go
-//   - Fixed dependency inversion: registry no longer imports builtin/extensions
-//   - Added on-demand registration: NewEmptyRegistry() + RegisterBuiltin() + RegisterVPP()
-//   - Component metadata moved to nodes/meta.go
+// V8 Refactoring:
+//   - Interface layering: core.Registry, core.RegistryBuilder, core.RegistryQuerier
+//   - nodes.Registry implements core.FullRegistry (all interfaces)
+//   - Type aliases: ConditionFactory/ActionFactory → core types
+//   - Compile-time interface checks added
 //
 // Dependency direction (correct):
 //   - builtin → nodes/registry → core
@@ -18,26 +18,28 @@ import (
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 )
 
-// ConditionFactory condition factory function
-type ConditionFactory func(id string, config map[string]any) (core.Condition, error)
+// ConditionFactory condition factory function (alias to core.ConditionFactory)
+type ConditionFactory = core.ConditionFactory
 
-// ActionFactory action factory function
-type ActionFactory func(id string, config map[string]any) (core.Action, error)
+// ActionFactory action factory function (alias to core.ActionFactory)
+type ActionFactory = core.ActionFactory
 
-// NodePackage node package interface for on-demand registration
-type NodePackage interface {
-	// GetConditionFactories returns condition factories
-	GetConditionFactories() map[string]ConditionFactory
-	// GetActionFactories returns action factories
-	GetActionFactories() map[string]ActionFactory
-}
+// NodePackage node package interface (alias to core.NodePackage)
+type NodePackage = core.NodePackage
 
 // Registry condition/action registry (instance-level, not global)
+// Implements core.FullRegistry (Registry + RegistryBuilder + RegistryQuerier)
 type Registry struct {
 	conditions map[string]ConditionFactory
 	actions    map[string]ActionFactory
 	mu         sync.RWMutex
 }
+
+// 编译期接口检查：nodes.Registry 实现所有 core 接口
+var _ core.Registry = (*Registry)(nil)
+var _ core.RegistryBuilder = (*Registry)(nil)
+var _ core.RegistryQuerier = (*Registry)(nil)
+var _ core.FullRegistry = (*Registry)(nil)
 
 // NewEmptyRegistry creates an empty registry (zero nodes).
 // Use this for on-demand registration pattern.

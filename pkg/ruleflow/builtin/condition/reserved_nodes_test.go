@@ -28,31 +28,32 @@ func newMockData() *mockDataContext {
 	}
 }
 
-func (m *mockDataContext) DeviceID() string           { return m.deviceID }
-func (m *mockDataContext) PointName() string          { return m.pointName }
-func (m *mockDataContext) PointType() string          { return "analog" }
-func (m *mockDataContext) FQN() string                { return m.deviceID + "/" + m.pointName }
-func (m *mockDataContext) Value() float64             { return m.value }
-func (m *mockDataContext) SetValue(v float64)         { m.value = v }
-func (m *mockDataContext) Quality() int               { return m.quality }
-func (m *mockDataContext) SetQuality(q int)           { m.quality = q }
-func (m *mockDataContext) UpperLimit() (float64, bool) { return 100.0, true }
-func (m *mockDataContext) LowerLimit() (float64, bool) { return 0.0, true }
-func (m *mockDataContext) LimitExceeded() bool        { return false }
-func (m *mockDataContext) SetLimitExceeded(v bool)    {}
-func (m *mockDataContext) GetTag(key string) string   { return m.tags[key] }
-func (m *mockDataContext) SetTag(key, value string)   { m.tags[key] = value }
-func (m *mockDataContext) TargetCount() int           { return 0 }
-func (m *mockDataContext) TargetAt(i int) string      { return "" }
-func (m *mockDataContext) AddTarget(target string)    {}
-func (m *mockDataContext) Dropped() bool              { return false }
-func (m *mockDataContext) SetDropped(v bool)          {}
-func (m *mockDataContext) Timestamp() int64           { return 1000 }
-func (m *mockDataContext) SpanContext() contract.SpanContext { return contract.SpanContext{} }
+func (m *mockDataContext) DeviceID() string                       { return m.deviceID }
+func (m *mockDataContext) PointName() string                      { return m.pointName }
+func (m *mockDataContext) SetPointName(name string)               { m.pointName = name }
+func (m *mockDataContext) PointType() string                      { return "analog" }
+func (m *mockDataContext) FQN() string                            { return m.deviceID + "/" + m.pointName }
+func (m *mockDataContext) Value() float64                         { return m.value }
+func (m *mockDataContext) SetValue(v float64)                     { m.value = v }
+func (m *mockDataContext) Quality() int                           { return m.quality }
+func (m *mockDataContext) SetQuality(q int)                       { m.quality = q }
+func (m *mockDataContext) UpperLimit() (float64, bool)            { return 100.0, true }
+func (m *mockDataContext) LowerLimit() (float64, bool)            { return 0.0, true }
+func (m *mockDataContext) LimitExceeded() bool                    { return false }
+func (m *mockDataContext) SetLimitExceeded(v bool)                {}
+func (m *mockDataContext) GetTag(key string) string               { return m.tags[key] }
+func (m *mockDataContext) SetTag(key, value string)               { m.tags[key] = value }
+func (m *mockDataContext) TargetCount() int                       { return 0 }
+func (m *mockDataContext) TargetAt(i int) string                  { return "" }
+func (m *mockDataContext) AddTarget(target string)                {}
+func (m *mockDataContext) Dropped() bool                          { return false }
+func (m *mockDataContext) SetDropped(v bool)                      {}
+func (m *mockDataContext) Timestamp() int64                       { return 1000 }
+func (m *mockDataContext) SpanContext() contract.SpanContext      { return contract.SpanContext{} }
 func (m *mockDataContext) SetSpanContext(sc contract.SpanContext) {}
-func (m *mockDataContext) PreviousValue() (float64, bool) { return m.prevValue, m.hasPrevValue }
-func (m *mockDataContext) SetPreviousValue(v float64) { m.prevValue = v; m.hasPrevValue = true }
-func (m *mockDataContext) Raw() any                   { return nil }
+func (m *mockDataContext) PreviousValue() (float64, bool)         { return m.prevValue, m.hasPrevValue }
+func (m *mockDataContext) SetPreviousValue(v float64)             { m.prevValue = v; m.hasPrevValue = true }
+func (m *mockDataContext) Raw() any                               { return nil }
 
 // ─────────────────────────────────────────────
 //  BitMaskCondition 测试
@@ -67,9 +68,9 @@ func TestBitMaskCondition(t *testing.T) {
 		value    float64
 		want     bool
 	}{
-		{"and_match", 0x0F, 0x05, "and", 0x15, true},  // 0x15 & 0x0F = 0x05
+		{"and_match", 0x0F, 0x05, "and", 0x15, true},     // 0x15 & 0x0F = 0x05
 		{"and_no_match", 0x0F, 0x05, "and", 0x16, false}, // 0x16 & 0x0F = 0x06
-		{"or_match", 0xF0, 0xF5, "or", 0x05, true},   // 0x05 | 0xF0 = 0xF5
+		{"or_match", 0xF0, 0xF5, "or", 0x05, true},       // 0x05 | 0xF0 = 0xF5
 		{"eq_match", 0, 0x10, "eq", 0x10, true},
 		{"eq_no_match", 0, 0x10, "eq", 0x11, false},
 	}
@@ -141,7 +142,7 @@ func TestRateLimitCondition(t *testing.T) {
 		currTs        int64
 		want          bool
 	}{
-		{"up_match", 10.0, "up", 50.0, 70.0, 0, 1000, true}, // rate = 20/s
+		{"up_match", 10.0, "up", 50.0, 70.0, 0, 1000, true},     // rate = 20/s
 		{"up_no_match", 10.0, "up", 50.0, 55.0, 0, 1000, false}, // rate = 5/s
 		{"down_match", 10.0, "down", 50.0, 30.0, 0, 1000, true}, // rate = -20/s
 		{"both_match", 10.0, "both", 50.0, 70.0, 0, 1000, true},

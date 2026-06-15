@@ -22,8 +22,8 @@ func NewRenameAction(id, pointName string) *RenameAction {
 }
 
 func (a *RenameAction) Execute(_ context.Context, data core.DataContext) error {
-	// 通过 Tag 机制实现重命名（DataContext 不可变 PointName）
-	data.SetTag("_rename", a.PointName)
+	// 直接设置新名称（DataContext 接口已支持 SetPointName）
+	data.SetPointName(a.PointName)
 	return nil
 }
 

@@ -46,6 +46,7 @@ func newMockData() *mockDataContext {
 
 func (m *mockDataContext) DeviceID() string                       { return m.deviceID }
 func (m *mockDataContext) PointName() string                      { return m.pointName }
+func (m *mockDataContext) SetPointName(name string)               { m.pointName = name }
 func (m *mockDataContext) PointType() string                      { return m.pointType }
 func (m *mockDataContext) FQN() string                            { return m.deviceID + "/" + m.pointName }
 func (m *mockDataContext) Value() float64                         { return m.value }

@@ -16,7 +16,7 @@ import (
 
 // LimitRecoveryState 越限恢复状态
 type LimitRecoveryState struct {
-	WasExceeded      bool  // 之前是否越限
+	WasExceeded       bool  // 之前是否越限
 	RecoveryStartTime int64 // 恢复开始时间（毫秒）
 }
 
@@ -62,10 +62,10 @@ func (c *LimitRecoveryCondition) Evaluate(_ context.Context, data core.DataConte
 
 	// 判断是否恢复（考虑迟滞）
 	isRecovered := true
-	if hasUpper && val >= upper - c.Hysteresis {
+	if hasUpper && val >= upper-c.Hysteresis {
 		isRecovered = false
 	}
-	if hasLower && val <= lower + c.Hysteresis {
+	if hasLower && val <= lower+c.Hysteresis {
 		isRecovered = false
 	}
 
@@ -121,12 +121,4 @@ func (c *LimitRecoveryCondition) ID() string   { return c.IDValue }
 func (c *LimitRecoveryCondition) Type() string { return "limit_recovery" }
 func (c *LimitRecoveryCondition) Description() string {
 	return fmt.Sprintf("limit recovery after %v with hysteresis %.2f", c.Duration, c.Hysteresis)
-}
-
-// abs helper function
-func abs(v float64) float64 {
-	if v < 0 {
-		return -v
-	}
-	return v
 }

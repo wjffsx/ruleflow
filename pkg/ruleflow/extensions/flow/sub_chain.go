@@ -108,6 +108,7 @@ func NewMappedDataContext(parent core.DataContext, inputMapping map[string]strin
 
 func (m *MappedDataContext) DeviceID() string            { return m.parent.DeviceID() }
 func (m *MappedDataContext) PointName() string           { return m.parent.PointName() }
+func (m *MappedDataContext) SetPointName(name string)    { m.parent.SetPointName(name) }
 func (m *MappedDataContext) PointType() string           { return m.parent.PointType() }
 func (m *MappedDataContext) FQN() string                 { return m.parent.FQN() }
 func (m *MappedDataContext) Value() float64              { return m.parent.Value() }
@@ -128,17 +129,17 @@ func (m *MappedDataContext) SetTag(key, value string) {
 	m.tagCache[key] = value
 	m.parent.SetTag(key, value)
 }
-func (m *MappedDataContext) TargetCount() int                        { return m.parent.TargetCount() }
-func (m *MappedDataContext) TargetAt(i int) string                   { return m.parent.TargetAt(i) }
-func (m *MappedDataContext) AddTarget(target string)                 { m.parent.AddTarget(target) }
-func (m *MappedDataContext) Dropped() bool                           { return m.parent.Dropped() }
-func (m *MappedDataContext) SetDropped(v bool)                       { m.parent.SetDropped(v) }
-func (m *MappedDataContext) Timestamp() int64                        { return m.parent.Timestamp() }
+func (m *MappedDataContext) TargetCount() int                       { return m.parent.TargetCount() }
+func (m *MappedDataContext) TargetAt(i int) string                  { return m.parent.TargetAt(i) }
+func (m *MappedDataContext) AddTarget(target string)                { m.parent.AddTarget(target) }
+func (m *MappedDataContext) Dropped() bool                          { return m.parent.Dropped() }
+func (m *MappedDataContext) SetDropped(v bool)                      { m.parent.SetDropped(v) }
+func (m *MappedDataContext) Timestamp() int64                       { return m.parent.Timestamp() }
 func (m *MappedDataContext) SpanContext() contract.SpanContext      { return m.parent.SpanContext() }
 func (m *MappedDataContext) SetSpanContext(sc contract.SpanContext) { m.parent.SetSpanContext(sc) }
-func (m *MappedDataContext) PreviousValue() (float64, bool)          { return m.parent.PreviousValue() }
-func (m *MappedDataContext) SetPreviousValue(v float64)              { m.parent.SetPreviousValue(v) }
-func (m *MappedDataContext) Raw() any                                { return m.parent.Raw() }
+func (m *MappedDataContext) PreviousValue() (float64, bool)         { return m.parent.PreviousValue() }
+func (m *MappedDataContext) SetPreviousValue(v float64)             { m.parent.SetPreviousValue(v) }
+func (m *MappedDataContext) Raw() any                               { return m.parent.Raw() }
 
 // MultiDataContext 接口实现
 func (m *MappedDataContext) GetPoint(pointName string) (float64, error) {

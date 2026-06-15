@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/condition/stateful"
-	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes/util"
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes/util"
 )
 
 // GetFactories 返回所有内置条件节点的工厂函数

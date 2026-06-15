@@ -156,31 +156,32 @@ func TestPerKeyLimiter_ImplementsCoreInterface(t *testing.T) {
 // memDC 测试用 DataContext
 type memDC struct{}
 
-func (m *memDC) DeviceID() string                       { return "d1" }
-func (m *memDC) PointName() string                      { return "p1" }
-func (m *memDC) PointType() string                      { return "analog" }
-func (m *memDC) FQN() string                            { return "d1/p1" }
-func (m *memDC) Value() float64                         { return 1.0 }
-func (m *memDC) SetValue(_ float64)                     {}
-func (m *memDC) Quality() int                           { return 0 }
-func (m *memDC) SetQuality(_ int)                       {}
-func (m *memDC) UpperLimit() (float64, bool)            { return 0, false }
-func (m *memDC) LowerLimit() (float64, bool)            { return 0, false }
-func (m *memDC) LimitExceeded() bool                    { return false }
-func (m *memDC) SetLimitExceeded(_ bool)                {}
-func (m *memDC) GetTag(_ string) string                 { return "" }
-func (m *memDC) SetTag(_, _ string)                     {}
-func (m *memDC) TargetCount() int                       { return 0 }
-func (m *memDC) TargetAt(_ int) string                  { return "" }
-func (m *memDC) AddTarget(_ string)                     {}
-func (m *memDC) Dropped() bool                          { return false }
-func (m *memDC) SetDropped(_ bool)                      {}
-func (m *memDC) Timestamp() int64                       { return time.Now().UnixNano() }
+func (m *memDC) DeviceID() string                      { return "d1" }
+func (m *memDC) PointName() string                     { return "p1" }
+func (m *memDC) SetPointName(_ string)                 {}
+func (m *memDC) PointType() string                     { return "analog" }
+func (m *memDC) FQN() string                           { return "d1/p1" }
+func (m *memDC) Value() float64                        { return 1.0 }
+func (m *memDC) SetValue(_ float64)                    {}
+func (m *memDC) Quality() int                          { return 0 }
+func (m *memDC) SetQuality(_ int)                      {}
+func (m *memDC) UpperLimit() (float64, bool)           { return 0, false }
+func (m *memDC) LowerLimit() (float64, bool)           { return 0, false }
+func (m *memDC) LimitExceeded() bool                   { return false }
+func (m *memDC) SetLimitExceeded(_ bool)               {}
+func (m *memDC) GetTag(_ string) string                { return "" }
+func (m *memDC) SetTag(_, _ string)                    {}
+func (m *memDC) TargetCount() int                      { return 0 }
+func (m *memDC) TargetAt(_ int) string                 { return "" }
+func (m *memDC) AddTarget(_ string)                    {}
+func (m *memDC) Dropped() bool                         { return false }
+func (m *memDC) SetDropped(_ bool)                     {}
+func (m *memDC) Timestamp() int64                      { return time.Now().UnixNano() }
 func (m *memDC) SpanContext() contract.SpanContext     { return contract.SpanContext{} }
 func (m *memDC) SetSpanContext(_ contract.SpanContext) {}
-func (m *memDC) PreviousValue() (float64, bool)         { return 0, false }
-func (m *memDC) SetPreviousValue(_ float64)             {}
-func (m *memDC) Raw() any                               { return nil }
+func (m *memDC) PreviousValue() (float64, bool)        { return 0, false }
+func (m *memDC) SetPreviousValue(_ float64)            {}
+func (m *memDC) Raw() any                              { return nil }
 
 func TestEngine_Integration_WithPerKeyLimiter(t *testing.T) {
 	lim := NewPerKeyLimiter(1, 1) // 每 key 每秒 1 个

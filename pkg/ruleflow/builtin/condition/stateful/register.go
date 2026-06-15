@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes/util"
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes/util"
 )
 
 // GetFactories 返回所有有状态条件节点的工厂函数
@@ -118,9 +118,11 @@ func newDynamicThresholdCondition(id string, config map[string]any) (core.Condit
 // 后续由 config/parse 递归解析替换为实际条件。
 type placeholderCondition struct{ id string }
 
-func (p *placeholderCondition) ID() string                                              { return p.id }
-func (p *placeholderCondition) Type() string                                            { return "placeholder" }
-func (p *placeholderCondition) Description() string                                     { return "placeholder (replaced during config parse)" }
+func (p *placeholderCondition) ID() string   { return p.id }
+func (p *placeholderCondition) Type() string { return "placeholder" }
+func (p *placeholderCondition) Description() string {
+	return "placeholder (replaced during config parse)"
+}
 func (p *placeholderCondition) Evaluate(_ context.Context, _ core.DataContext) bool { return true }
 
 func newPlaceholderCondition(id string) core.Condition {

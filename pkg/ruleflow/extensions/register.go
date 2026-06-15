@@ -2,6 +2,7 @@
 package extensions
 
 import (
+	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/extensions/action"
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/extensions/condition"
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/extensions/flow"
@@ -11,9 +12,12 @@ import (
 // Package VPP node package for registry registration
 type Package struct{}
 
+// 编译期接口检查：extensions.Package 实现 core.NodePackage
+var _ core.NodePackage = Package{}
+
 // GetConditionFactories returns all VPP condition factories (NodePackage interface)
-func (Package) GetConditionFactories() map[string]nodes.ConditionFactory {
-	result := make(map[string]nodes.ConditionFactory)
+func (Package) GetConditionFactories() map[string]core.ConditionFactory {
+	result := make(map[string]core.ConditionFactory)
 	for k, v := range condition.GetFactories() {
 		result[k] = v
 	}
@@ -21,8 +25,8 @@ func (Package) GetConditionFactories() map[string]nodes.ConditionFactory {
 }
 
 // GetActionFactories returns all VPP action factories (NodePackage interface)
-func (Package) GetActionFactories() map[string]nodes.ActionFactory {
-	result := make(map[string]nodes.ActionFactory)
+func (Package) GetActionFactories() map[string]core.ActionFactory {
+	result := make(map[string]core.ActionFactory)
 	for k, v := range action.GetFactories() {
 		result[k] = v
 	}

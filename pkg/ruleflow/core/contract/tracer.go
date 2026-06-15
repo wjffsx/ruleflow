@@ -29,6 +29,10 @@ type noopProvider struct{}
 
 func (noopProvider) Tracer(_ string) Tracer { return noopTracer{} }
 
+// 编译期接口检查
+var _ Tracer = noopTracer{}
+var _ TracerProvider = noopProvider{}
+
 // FuncProvider 适配器：将 BeginFunc 包装为 TracerProvider
 type FuncProvider struct {
 	name  string

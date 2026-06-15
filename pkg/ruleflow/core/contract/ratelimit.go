@@ -17,6 +17,9 @@ type noopLimiter struct{}
 func (noopLimiter) Allow(_ string) bool                    { return true }
 func (noopLimiter) Wait(_ context.Context, _ string) error { return nil }
 
+// 编译期接口检查
+var _ Limiter = noopLimiter{}
+
 // LimiterKey 构造引擎内部限流 key。
 func LimiterKey(chainID string) string {
 	return "chain:" + chainID

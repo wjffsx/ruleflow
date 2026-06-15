@@ -185,16 +185,24 @@ func (w *FileWatcher) Stop() error {
 // run 事件循环
 func (w *FileWatcher) run(ctx context.Context, fw *fsnotify.Watcher, stopCh chan struct{}) {
 	var debounceTimer *time.Timer
-	var debounceCh <-chan time.Time
 
 	for {
 		select {
 		case <-ctx.Done():
+			if debounceTimer != nil {
+				debounceTimer.Stop()
+			}
 			return
 		case <-stopCh:
+			if debounceTimer != nil {
+				debounceTimer.Stop()
+			}
 			return
 		case event, ok := <-fw.Events:
 			if !ok {
+				if debounceTimer != nil {
+					debounceTimer.Stop()
+				}
 				return
 			}
 			if !shouldHandle(event) {
@@ -203,22 +211,22 @@ func (w *FileWatcher) run(ctx context.Context, fw *fsnotify.Watcher, stopCh chan
 			w.logger.Info("file watcher: change detected",
 				"path", w.path, "op", event.Op.String())
 
-			// 防抖：200ms 内多次写入合并为一次
+			// 防抖：重置定时器，debounce 内多次写入合并为一次
 			if debounceTimer != nil {
 				debounceTimer.Stop()
 			}
-			debounceCh = time.After(w.debounce)
-			go func() {
-				<-debounceCh
+			debounceTimer = time.AfterFunc(w.debounce, func() {
 				w.reload(ctx)
-			}()
+			})
 
 		case err, ok := <-fw.Errors:
 			if !ok {
+				if debounceTimer != nil {
+					debounceTimer.Stop()
+				}
 				return
 			}
 			w.logger.Error("file watcher error", "err", err)
-			_ = debounceTimer // keep linter happy
 		}
 	}
 }

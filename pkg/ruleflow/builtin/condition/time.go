@@ -10,6 +10,17 @@ import (
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 )
 
+// TimestampUnitThreshold 时间戳单位判断阈值
+const TimestampUnitThreshold = 1e15
+
+// normalizeTimestamp 将时间戳转换为 time.Time
+func normalizeTimestamp(ts int64) time.Time {
+	if ts > TimestampUnitThreshold {
+		return time.Unix(0, ts) // 纳秒
+	}
+	return time.UnixMilli(ts) // 毫秒
+}
+
 // ─────────────────────────────────────────────
 //  时间窗口条件
 // ─────────────────────────────────────────────
@@ -34,11 +45,7 @@ func NewTimeWindowCondition(id, start, end, timezone string, weekdays []int) *Ti
 }
 
 func (c *TimeWindowCondition) Evaluate(_ context.Context, data core.DataContext) bool {
-	ts := time.Unix(0, data.Timestamp())
-	if data.Timestamp() > 1e18 {
-		// 毫秒级时间戳
-		ts = time.UnixMilli(data.Timestamp())
-	}
+	ts := normalizeTimestamp(data.Timestamp())
 
 	loc := time.UTC
 	if c.Timezone != "" {

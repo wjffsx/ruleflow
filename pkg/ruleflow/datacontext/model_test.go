@@ -2,6 +2,7 @@ package datacontext
 
 import (
 	"context"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -29,6 +30,7 @@ type mockDataForMulti struct {
 
 func (m *mockDataForMulti) DeviceID() string                       { return m.deviceID }
 func (m *mockDataForMulti) PointName() string                      { return m.pointName }
+func (m *mockDataForMulti) SetPointName(name string)               { m.pointName = name }
 func (m *mockDataForMulti) PointType() string                      { return "analog" }
 func (m *mockDataForMulti) FQN() string                            { return m.deviceID + "/" + m.pointName }
 func (m *mockDataForMulti) Value() float64                         { return m.value }
@@ -150,7 +152,7 @@ func TestMultiDataContext_GetPoint(t *testing.T) {
 	}
 
 	// 获取未添加的点
-	data, ok = mdc.GetPoint("temp_002")
+	_, ok = mdc.GetPoint("temp_002")
 	if ok {
 		t.Error("temp_002 should not exist")
 	}
@@ -356,9 +358,9 @@ func TestMultiInputBuffer_Add(t *testing.T) {
 	ctx := context.Background()
 	buf := NewMultiInputBuffer(ctx, 5*time.Second)
 
-	triggered := false
+	var triggered atomic.Bool
 	buf.SetTriggerCallback(func(ctx context.Context, mdc *MultiDataContext) {
-		triggered = true
+		triggered.Store(true)
 	})
 
 	inputNames := []string{"temp_001", "temp_002"}
@@ -378,7 +380,7 @@ func TestMultiInputBuffer_Add(t *testing.T) {
 	// 等待回调触发
 	time.Sleep(100 * time.Millisecond)
 
-	if !triggered {
+	if !triggered.Load() {
 		t.Error("Trigger callback should be called")
 	}
 
@@ -405,9 +407,9 @@ func TestMultiInputBuffer_Size(t *testing.T) {
 	buf := NewMultiInputBuffer(ctx, 5*time.Second)
 
 	// 设置触发回调（确保清理逻辑执行）
-	triggered := false
+	var triggered atomic.Bool
 	buf.SetTriggerCallback(func(ctx context.Context, mdc *MultiDataContext) {
-		triggered = true
+		triggered.Store(true)
 	})
 
 	inputNames := []string{"temp_001", "temp_002"}
@@ -425,7 +427,7 @@ func TestMultiInputBuffer_Size(t *testing.T) {
 	// 等待清理（异步）
 	time.Sleep(200 * time.Millisecond)
 
-	if !triggered {
+	if !triggered.Load() {
 		t.Error("Trigger callback should be called")
 	}
 

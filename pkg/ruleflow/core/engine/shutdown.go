@@ -11,12 +11,12 @@ import (
 
 // shutdown 优雅关闭管理器（引擎内部实现）
 type shutdown struct {
-	stateVal  atomic.Int32
-	wg        sync.WaitGroup
-	once      sync.Once
-	err       error
-	errMu     sync.Mutex
-	startAt   time.Time
+	stateVal atomic.Int32
+	wg       sync.WaitGroup
+	once     sync.Once
+	err      error
+	errMu    sync.Mutex
+	startAt  time.Time
 }
 
 // newShutdown 创建关闭管理器
@@ -59,11 +59,6 @@ func (s *shutdown) isShutdown() bool {
 	return s.stateVal.Load() == int32(contract.ShutdownStateShutdown)
 }
 
-// getState 返回当前状态
-func (s *shutdown) getState() contract.ShutdownState {
-	return contract.ShutdownState(s.stateVal.Load())
-}
-
 // wait 等待所有进行中的评估完成或上下文取消。
 func (s *shutdown) wait(ctx context.Context) error {
 	done := make(chan struct{})
@@ -83,11 +78,4 @@ func (s *shutdown) wait(ctx context.Context) error {
 		s.stateVal.Store(int32(contract.ShutdownStateShutdown))
 		return ctx.Err()
 	}
-}
-
-// lastError 返回最近一次错误
-func (s *shutdown) lastError() error {
-	s.errMu.Lock()
-	defer s.errMu.Unlock()
-	return s.err
 }

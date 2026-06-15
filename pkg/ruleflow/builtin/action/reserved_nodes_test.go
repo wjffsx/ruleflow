@@ -11,11 +11,11 @@ import (
 
 // mockDataContext 用于测试的模拟 DataContext
 type mockDataContext struct {
-	deviceID     string
-	pointName    string
-	value        float64
-	quality      int
-	tags         map[string]string
+	deviceID  string
+	pointName string
+	value     float64
+	quality   int
+	tags      map[string]string
 }
 
 func newMockData() *mockDataContext {
@@ -26,31 +26,32 @@ func newMockData() *mockDataContext {
 	}
 }
 
-func (m *mockDataContext) DeviceID() string            { return m.deviceID }
-func (m *mockDataContext) PointName() string           { return m.pointName }
-func (m *mockDataContext) PointType() string           { return "digital" }
-func (m *mockDataContext) FQN() string                 { return m.deviceID + "/" + m.pointName }
-func (m *mockDataContext) Value() float64              { return m.value }
-func (m *mockDataContext) SetValue(v float64)          { m.value = v }
-func (m *mockDataContext) Quality() int                { return m.quality }
-func (m *mockDataContext) SetQuality(q int)            { m.quality = q }
-func (m *mockDataContext) UpperLimit() (float64, bool) { return 0, false }
-func (m *mockDataContext) LowerLimit() (float64, bool) { return 0, false }
-func (m *mockDataContext) LimitExceeded() bool         { return false }
-func (m *mockDataContext) SetLimitExceeded(v bool)     {}
-func (m *mockDataContext) GetTag(key string) string    { return m.tags[key] }
-func (m *mockDataContext) SetTag(key, value string)    { m.tags[key] = value }
-func (m *mockDataContext) TargetCount() int            { return 0 }
-func (m *mockDataContext) TargetAt(i int) string       { return "" }
-func (m *mockDataContext) AddTarget(target string)     {}
-func (m *mockDataContext) Dropped() bool               { return false }
-func (m *mockDataContext) SetDropped(v bool)           {}
-func (m *mockDataContext) Timestamp() int64            { return 1000 }
-func (m *mockDataContext) SpanContext() contract.SpanContext { return contract.SpanContext{} }
+func (m *mockDataContext) DeviceID() string                       { return m.deviceID }
+func (m *mockDataContext) PointName() string                      { return m.pointName }
+func (m *mockDataContext) SetPointName(name string)               { m.pointName = name }
+func (m *mockDataContext) PointType() string                      { return "digital" }
+func (m *mockDataContext) FQN() string                            { return m.deviceID + "/" + m.pointName }
+func (m *mockDataContext) Value() float64                         { return m.value }
+func (m *mockDataContext) SetValue(v float64)                     { m.value = v }
+func (m *mockDataContext) Quality() int                           { return m.quality }
+func (m *mockDataContext) SetQuality(q int)                       { m.quality = q }
+func (m *mockDataContext) UpperLimit() (float64, bool)            { return 0, false }
+func (m *mockDataContext) LowerLimit() (float64, bool)            { return 0, false }
+func (m *mockDataContext) LimitExceeded() bool                    { return false }
+func (m *mockDataContext) SetLimitExceeded(v bool)                {}
+func (m *mockDataContext) GetTag(key string) string               { return m.tags[key] }
+func (m *mockDataContext) SetTag(key, value string)               { m.tags[key] = value }
+func (m *mockDataContext) TargetCount() int                       { return 0 }
+func (m *mockDataContext) TargetAt(i int) string                  { return "" }
+func (m *mockDataContext) AddTarget(target string)                {}
+func (m *mockDataContext) Dropped() bool                          { return false }
+func (m *mockDataContext) SetDropped(v bool)                      {}
+func (m *mockDataContext) Timestamp() int64                       { return 1000 }
+func (m *mockDataContext) SpanContext() contract.SpanContext      { return contract.SpanContext{} }
 func (m *mockDataContext) SetSpanContext(sc contract.SpanContext) {}
-func (m *mockDataContext) PreviousValue() (float64, bool) { return 0, false }
-func (m *mockDataContext) SetPreviousValue(v float64)  {}
-func (m *mockDataContext) Raw() any                    { return nil }
+func (m *mockDataContext) PreviousValue() (float64, bool)         { return 0, false }
+func (m *mockDataContext) SetPreviousValue(v float64)             {}
+func (m *mockDataContext) Raw() any                               { return nil }
 
 // ─────────────────────────────────────────────
 //  BitUnpackAction 测试

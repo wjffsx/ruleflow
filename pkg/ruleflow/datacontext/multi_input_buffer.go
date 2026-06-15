@@ -108,17 +108,19 @@ func (buf *MultiInputBuffer) Add(chainID string, inputNames []string, data core.
 
 	// 如果齐集完成，触发回调
 	if ready && buf.triggerCallback != nil {
-		// 异步触发回调
-		go buf.triggerCallback(buf.ctx, mdc)
+		// 异步触发回调，回调完成后才释放池化对象
+		callback := buf.triggerCallback
+		ctx := buf.ctx
+		go func() {
+			callback(ctx, mdc)
+			buf.pool.Release(mdc)
+		}()
 
 		// 清理缓存
 		delete(deviceCache, mdcKey)
 		if len(deviceCache) == 0 {
 			delete(buf.entries, deviceID)
 		}
-
-		// 释放 MultiDataContext
-		buf.pool.Release(mdc)
 	}
 
 	return ready

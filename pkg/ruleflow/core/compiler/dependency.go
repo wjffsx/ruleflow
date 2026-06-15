@@ -271,7 +271,11 @@ func (g *DependencyGraph) detectCycleLocked(start string) ([]string, bool) {
 func removeFromSlice(s []string, target string) []string {
 	for i, v := range s {
 		if v == target {
-			return append(s[:i], s[i+1:]...)
+			// 创建新切片，避免修改底层数组
+			result := make([]string, len(s)-1)
+			copy(result, s[:i])
+			copy(result[i:], s[i+1:])
+			return result
 		}
 	}
 	return s

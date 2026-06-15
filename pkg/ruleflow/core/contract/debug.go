@@ -53,8 +53,11 @@ type DebugManager interface {
 // NoopDebugManager 空调试管理器实现
 type NoopDebugManager struct{}
 
-func (NoopDebugManager) Enabled() bool                                         { return false }
-func (NoopDebugManager) ShouldCapture(_ string) bool                           { return false }
-func (NoopDebugManager) Capture(_ any, _ DebugEvent)                           {}
-func (NoopDebugManager) CaptureIn(_ any, _, _, _, _, _ string)                 {}
-func (NoopDebugManager) CaptureOut(_ any, _, _, _, _, _, _, _ string, _ int64, _ string) {}
+func (NoopDebugManager) Enabled() bool                                                { return false }
+func (NoopDebugManager) ShouldCapture(_ string) bool                                  { return false }
+func (NoopDebugManager) Capture(_ any, _ DebugEvent)                                  {}
+func (NoopDebugManager) CaptureIn(_ any, _, _, _, _, _ string)                        {}
+func (NoopDebugManager) CaptureOut(_ any, _, _, _, _, _, _ string, _ int64, _ string) {}
+
+// 编译期接口检查
+var _ DebugManager = NoopDebugManager{}

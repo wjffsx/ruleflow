@@ -33,3 +33,6 @@ func (noopLogger) Info(_ string, _ ...any)  {}
 func (noopLogger) Warn(_ string, _ ...any)  {}
 func (noopLogger) Error(_ string, _ ...any) {}
 func (noopLogger) With(_ ...any) Logger     { return noopLogger{} }
+
+// 编译期接口检查
+var _ Logger = noopLogger{}

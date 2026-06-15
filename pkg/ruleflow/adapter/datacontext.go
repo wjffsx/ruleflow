@@ -29,6 +29,7 @@ import (
 type DataPoint interface {
 	GetDeviceID() string
 	GetPointName() string
+	SetPointName(name string) // 新增：支持 RenameAction
 	GetPointType() string
 	GetValue() float64
 	SetValue(v float64)
@@ -47,11 +48,12 @@ type DataPoint interface {
 // DataContextAdapter 将 DataPoint 适配为 ruleflow 的 DataContext 接口。
 // 零拷贝设计：直接委托到原始数据点，不复制任何字段。
 type DataContextAdapter struct {
-	point   DataPoint
-	targets []string          // 预分配，避免热路径分配
-	tags    map[string]string // 延迟分配
-	fqn     string            // 预计算缓存：DeviceID/PointName
-	prevVal *float64          // 前值缓存（用于状态变化检测）
+	point    DataPoint
+	targets  []string          // 预分配，避免热路径分配
+	tags     map[string]string // 延迟分配
+	fqn      string            // 预计算缓存：DeviceID/PointName
+	prevVal  float64           // 前值缓存（值类型，避免堆分配）
+	prevSet  bool              // 前值是否已设置
 }
 
 // 对象池
@@ -77,7 +79,8 @@ func ReleaseDataContext(ctx *DataContextAdapter) {
 	ctx.point = nil
 	ctx.tags = nil
 	ctx.fqn = ""
-	ctx.prevVal = nil
+	ctx.prevVal = 0
+	ctx.prevSet = false
 	dataCtxPool.Put(ctx)
 }
 
@@ -85,6 +88,10 @@ func ReleaseDataContext(ctx *DataContextAdapter) {
 
 func (c *DataContextAdapter) DeviceID() string            { return c.point.GetDeviceID() }
 func (c *DataContextAdapter) PointName() string           { return c.point.GetPointName() }
+func (c *DataContextAdapter) SetPointName(name string) {
+	c.point.SetPointName(name)
+	c.fqn = c.point.GetDeviceID() + "/" + name // 更新缓存
+}
 func (c *DataContextAdapter) PointType() string           { return c.point.GetPointType() }
 func (c *DataContextAdapter) FQN() string                 { return c.fqn }
 func (c *DataContextAdapter) Value() float64              { return c.point.GetValue() }
@@ -127,12 +134,10 @@ func (c *DataContextAdapter) SetSpanContext(_ contract.SpanContext) {}
 func (c *DataContextAdapter) Raw() any                              { return c.point }
 
 func (c *DataContextAdapter) PreviousValue() (float64, bool) {
-	if c.prevVal == nil {
-		return 0, false
-	}
-	return *c.prevVal, true
+	return c.prevVal, c.prevSet
 }
 
 func (c *DataContextAdapter) SetPreviousValue(v float64) {
-	c.prevVal = &v
+	c.prevVal = v
+	c.prevSet = true
 }

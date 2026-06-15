@@ -80,8 +80,11 @@ func (cb *CircuitBreaker) RecordSuccess() {
 	switch CircuitState(cb.state.Load()) {
 	case CircuitHalfOpen:
 		if cb.successCount.Add(1) >= int64(cb.halfOpenRequests) {
-			cb.state.Store(int32(CircuitClosed))
-			cb.failureCount.Store(0)
+			// CAS 确保只有一个 goroutine 执行状态转换
+			if cb.state.CompareAndSwap(int32(CircuitHalfOpen), int32(CircuitClosed)) {
+				cb.failureCount.Store(0)
+				cb.successCount.Store(0)
+			}
 		}
 	case CircuitClosed:
 		cb.failureCount.Store(0)

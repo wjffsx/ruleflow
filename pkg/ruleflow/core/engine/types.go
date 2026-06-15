@@ -56,6 +56,9 @@ type chainSnapshot struct {
 	rules  map[string]*core.CompiledRule
 }
 
+// MaxMetadataSize Metadata map 最大容量（超过则丢弃，避免池化后内存泄漏）
+const MaxMetadataSize = 32
+
 // Reset 重置 EvalResult 到初始可复用状态。
 func (r *EvalResult) Reset() {
 	if r == nil {
@@ -66,8 +69,7 @@ func (r *EvalResult) Reset() {
 	r.Data = nil
 	r.Dropped = false
 	if r.Metadata != nil {
-		const maxMetadataSize = 32
-		if len(r.Metadata) > maxMetadataSize {
+		if len(r.Metadata) > MaxMetadataSize {
 			r.Metadata = nil
 		} else {
 			for k := range r.Metadata {

@@ -39,31 +39,32 @@ func newMock() *mockData {
 	}
 }
 
-func (m *mockData) DeviceID() string                        { return m.deviceID }
-func (m *mockData) PointName() string                       { return m.pointName }
-func (m *mockData) PointType() string                       { return m.pointType }
-func (m *mockData) FQN() string                             { return m.deviceID + "/" + m.pointName }
-func (m *mockData) Value() float64                          { return m.value }
-func (m *mockData) SetValue(v float64)                      { m.value = v }
-func (m *mockData) Quality() int                            { return m.quality }
-func (m *mockData) SetQuality(q int)                        { m.quality = q }
-func (m *mockData) UpperLimit() (float64, bool)             { return m.upperLimit, m.hasUpper }
-func (m *mockData) LowerLimit() (float64, bool)             { return m.lowerLimit, m.hasLower }
-func (m *mockData) LimitExceeded() bool                     { return m.limitExceeded }
-func (m *mockData) SetLimitExceeded(v bool)                 { m.limitExceeded = v }
-func (m *mockData) GetTag(key string) string                { return m.tags[key] }
-func (m *mockData) SetTag(key, value string)                { m.tags[key] = value }
-func (m *mockData) TargetCount() int                        { return len(m.targets) }
-func (m *mockData) TargetAt(i int) string                   { return m.targets[i] }
-func (m *mockData) AddTarget(target string)                 { m.targets = append(m.targets, target) }
-func (m *mockData) Dropped() bool                           { return m.dropped }
-func (m *mockData) SetDropped(v bool)                       { m.dropped = v }
-func (m *mockData) Timestamp() int64                        { return m.timestamp }
+func (m *mockData) DeviceID() string                       { return m.deviceID }
+func (m *mockData) PointName() string                      { return m.pointName }
+func (m *mockData) SetPointName(name string)               { m.pointName = name }
+func (m *mockData) PointType() string                      { return m.pointType }
+func (m *mockData) FQN() string                            { return m.deviceID + "/" + m.pointName }
+func (m *mockData) Value() float64                         { return m.value }
+func (m *mockData) SetValue(v float64)                     { m.value = v }
+func (m *mockData) Quality() int                           { return m.quality }
+func (m *mockData) SetQuality(q int)                       { m.quality = q }
+func (m *mockData) UpperLimit() (float64, bool)            { return m.upperLimit, m.hasUpper }
+func (m *mockData) LowerLimit() (float64, bool)            { return m.lowerLimit, m.hasLower }
+func (m *mockData) LimitExceeded() bool                    { return m.limitExceeded }
+func (m *mockData) SetLimitExceeded(v bool)                { m.limitExceeded = v }
+func (m *mockData) GetTag(key string) string               { return m.tags[key] }
+func (m *mockData) SetTag(key, value string)               { m.tags[key] = value }
+func (m *mockData) TargetCount() int                       { return len(m.targets) }
+func (m *mockData) TargetAt(i int) string                  { return m.targets[i] }
+func (m *mockData) AddTarget(target string)                { m.targets = append(m.targets, target) }
+func (m *mockData) Dropped() bool                          { return m.dropped }
+func (m *mockData) SetDropped(v bool)                      { m.dropped = v }
+func (m *mockData) Timestamp() int64                       { return m.timestamp }
 func (m *mockData) SpanContext() contract.SpanContext      { return contract.SpanContext{} }
 func (m *mockData) SetSpanContext(sc contract.SpanContext) {}
-func (m *mockData) Raw() any                                { return nil }
-func (m *mockData) PreviousValue() (float64, bool)          { return 0, false }
-func (m *mockData) SetPreviousValue(v float64)              {}
+func (m *mockData) Raw() any                               { return nil }
+func (m *mockData) PreviousValue() (float64, bool)         { return 0, false }
+func (m *mockData) SetPreviousValue(v float64)             {}
 
 // ─────────────────────────────────────────────
 //  DeviceTypeCondition 测试

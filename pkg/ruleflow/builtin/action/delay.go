@@ -62,31 +62,32 @@ type dataSnapshot struct {
 	timestamp int64
 }
 
-func (d *dataSnapshot) DeviceID() string                     { return d.deviceID }
-func (d *dataSnapshot) PointName() string                    { return d.pointName }
-func (d *dataSnapshot) PointType() string                    { return "" }
-func (d *dataSnapshot) FQN() string                          { return d.deviceID + "/" + d.pointName }
-func (d *dataSnapshot) Value() float64                       { return d.value }
-func (d *dataSnapshot) SetValue(v float64)                   { d.value = v }
-func (d *dataSnapshot) Quality() int                         { return d.quality }
-func (d *dataSnapshot) SetQuality(q int)                     { d.quality = q }
-func (d *dataSnapshot) UpperLimit() (float64, bool)          { return 0, false }
-func (d *dataSnapshot) LowerLimit() (float64, bool)          { return 0, false }
-func (d *dataSnapshot) LimitExceeded() bool                  { return false }
-func (d *dataSnapshot) SetLimitExceeded(bool)                {}
-func (d *dataSnapshot) GetTag(string) string                 { return "" }
-func (d *dataSnapshot) SetTag(string, string)                {}
-func (d *dataSnapshot) TargetCount() int                     { return 0 }
-func (d *dataSnapshot) TargetAt(int) string                  { return "" }
-func (d *dataSnapshot) AddTarget(string)                     {}
-func (d *dataSnapshot) Dropped() bool                        { return false }
-func (d *dataSnapshot) SetDropped(bool)                      {}
-func (d *dataSnapshot) Timestamp() int64                     { return d.timestamp }
-func (d *dataSnapshot) PreviousValue() (float64, bool)       { return 0, false }
-func (d *dataSnapshot) SetPreviousValue(float64)             {}
+func (d *dataSnapshot) DeviceID() string                    { return d.deviceID }
+func (d *dataSnapshot) PointName() string                   { return d.pointName }
+func (d *dataSnapshot) SetPointName(_ string)               {} // 只读快照，不支持修改
+func (d *dataSnapshot) PointType() string                   { return "" }
+func (d *dataSnapshot) FQN() string                         { return d.deviceID + "/" + d.pointName }
+func (d *dataSnapshot) Value() float64                      { return d.value }
+func (d *dataSnapshot) SetValue(v float64)                  { d.value = v }
+func (d *dataSnapshot) Quality() int                        { return d.quality }
+func (d *dataSnapshot) SetQuality(q int)                    { d.quality = q }
+func (d *dataSnapshot) UpperLimit() (float64, bool)         { return 0, false }
+func (d *dataSnapshot) LowerLimit() (float64, bool)         { return 0, false }
+func (d *dataSnapshot) LimitExceeded() bool                 { return false }
+func (d *dataSnapshot) SetLimitExceeded(bool)               {}
+func (d *dataSnapshot) GetTag(string) string                { return "" }
+func (d *dataSnapshot) SetTag(string, string)               {}
+func (d *dataSnapshot) TargetCount() int                    { return 0 }
+func (d *dataSnapshot) TargetAt(int) string                 { return "" }
+func (d *dataSnapshot) AddTarget(string)                    {}
+func (d *dataSnapshot) Dropped() bool                       { return false }
+func (d *dataSnapshot) SetDropped(bool)                     {}
+func (d *dataSnapshot) Timestamp() int64                    { return d.timestamp }
+func (d *dataSnapshot) PreviousValue() (float64, bool)      { return 0, false }
+func (d *dataSnapshot) SetPreviousValue(float64)            {}
 func (d *dataSnapshot) SpanContext() contract.SpanContext   { return contract.SpanContext{} }
 func (d *dataSnapshot) SetSpanContext(contract.SpanContext) {}
-func (d *dataSnapshot) Raw() any                             { return nil }
+func (d *dataSnapshot) Raw() any                            { return nil }
 
 // 确保 dataSnapshot 实现 DataContext 接口
 var _ core.DataContext = (*dataSnapshot)(nil)

@@ -27,6 +27,8 @@ var (
 	ErrCyclicDependency = errors.New("cyclic dependency detected")
 	// ErrPanicRecovered panic 已恢复
 	ErrPanicRecovered = errors.New("panic recovered")
+	// ErrResource 资源类错误
+	ErrResource = errors.New("resource error")
 )
 
 // ErrorType 错误类型分类
@@ -138,6 +140,8 @@ func (e *RuleFlowError) Is(target error) bool {
 		return e.Type == ErrorTypePanic
 	case ErrEngineShutdown:
 		return e.Type == ErrorTypeShutdown
+	case ErrResource:
+		return e.Type == ErrorTypeResource
 	case context.DeadlineExceeded:
 		return e.Type == ErrorTypeTimeout
 	}

@@ -1,6 +1,6 @@
 module github.com/wjffsx/ruleflow
 
-go 1.25.0
+go 1.24
 
 replace (
 	github.com/wjffsx/ruleflow/pkg/ruleflow/adapter => ./pkg/ruleflow/adapter

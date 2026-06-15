@@ -27,6 +27,7 @@ type simpleDataPoint struct {
 
 func (d *simpleDataPoint) DeviceID() string                      { return d.deviceID }
 func (d *simpleDataPoint) PointName() string                     { return d.pointName }
+func (d *simpleDataPoint) SetPointName(name string)              { d.pointName = name }
 func (d *simpleDataPoint) PointType() string                     { return d.pointType }
 func (d *simpleDataPoint) FQN() string                           { return d.deviceID + "/" + d.pointName }
 func (d *simpleDataPoint) Value() float64                        { return d.value }

@@ -54,9 +54,9 @@ func (a *BitUnpackAction) Description() string {
 // 将多个布尔值从 Tag 中读取，合并为一个整数
 type BitPackAction struct {
 	IDValue     string   `json:"id"`
-	InputTags   []string `json:"input_tags"`  // 输入标签名列表
+	InputTags   []string `json:"input_tags"`   // 输入标签名列表
 	OutputField string   `json:"output_field"` // 输出到哪个字段，如 "value" 或 tag 名
-	StartBit    int      `json:"start_bit"`   // 起始位位置
+	StartBit    int      `json:"start_bit"`    // 起始位位置
 }
 
 // NewBitPackAction 创建位合并动作

@@ -90,13 +90,13 @@ func (c *RateLimitWindowCondition) Evaluate(_ context.Context, data core.DataCon
 	// 计算窗口内平均变化率
 	oldest := state.Samples[0]
 	newest := state.Samples[len(state.Samples)-1]
-	elapsed := float64(newest.Timestamp - oldest.Timestamp) / 1000.0
+	elapsed := float64(newest.Timestamp-oldest.Timestamp) / 1000.0
 
 	if elapsed <= 0 {
 		return false
 	}
 
-	avgRate := math.Abs(newest.Value - oldest.Value) / elapsed
+	avgRate := math.Abs(newest.Value-oldest.Value) / elapsed
 	return avgRate > c.RateThreshold
 }
 

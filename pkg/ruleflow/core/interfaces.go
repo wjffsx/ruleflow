@@ -21,6 +21,7 @@ type DataContext interface {
 	// 基础标识
 	DeviceID() string
 	PointName() string
+	SetPointName(name string) // 重命名数据点（用于 RenameAction）
 	PointType() string
 
 	// 全限定名（格式: DeviceID/PointName）
@@ -142,6 +143,40 @@ func (f ActionFunc) Description() string { return "function action" }
 type Registry interface {
 	CreateCondition(typeName, id string, config map[string]any) (Condition, error)
 	CreateAction(typeName, id string, config map[string]any) (Action, error)
+}
+
+// ConditionFactory 条件工厂函数类型（V8: 接口分层）
+type ConditionFactory func(id string, config map[string]any) (Condition, error)
+
+// ActionFactory 动作工厂函数类型（V8: 接口分层）
+type ActionFactory func(id string, config map[string]any) (Action, error)
+
+// NodePackage 节点包接口，用于批量注册（V8: 接口分层）
+type NodePackage interface {
+	GetConditionFactories() map[string]ConditionFactory
+	GetActionFactories() map[string]ActionFactory
+}
+
+// RegistryBuilder 注册构建器接口（用于 config/loader）
+type RegistryBuilder interface {
+	RegisterCondition(typeName string, factory ConditionFactory)
+	RegisterAction(typeName string, factory ActionFactory)
+	RegisterPackage(pkg NodePackage)
+}
+
+// RegistryQuerier 注册查询接口（用于调试/可视化）
+type RegistryQuerier interface {
+	ListConditionTypes() []string
+	ListActionTypes() []string
+	HasCondition(typeName string) bool
+	HasAction(typeName string) bool
+}
+
+// FullRegistry 完整注册接口（向后兼容组合）
+type FullRegistry interface {
+	Registry
+	RegistryBuilder
+	RegistryQuerier
 }
 
 // DefaultRegistry 默认注册表（无内置注册，用于 Engine 初始化）

@@ -69,9 +69,23 @@ func (e *Engine) evalChainBatchPlain(ctx context.Context, chainID string, dataLi
 
 // evalChainBatchPooled 池化批量评估。
 func (e *Engine) evalChainBatchPooled(ctx context.Context, chainID string, dataList []core.DataContext) ([]*EvalResult, error) {
+	snap := e.snapshot.Load()
+	chain, ok := snap.chains[chainID]
+	if !ok {
+		results := make([]*EvalResult, len(dataList))
+		for i, data := range dataList {
+			r := acquireResult()
+			r.Data = data
+			results[i] = r
+		}
+		return results, nil
+	}
+
+	_ = chain
+
 	results := make([]*EvalResult, len(dataList))
 	for i, data := range dataList {
-		result, _ := e.EvalChain(ctx, chainID, data)
+		result, _ := e.evalChainPooled(ctx, chainID, data)
 		results[i] = result
 	}
 	return results, nil
@@ -79,3 +93,30 @@ func (e *Engine) evalChainBatchPooled(ctx context.Context, chainID string, dataL
 
 // time alias to keep imports tidy
 var _ = time.Now
+
+// newEvalResult 根据池化配置创建 EvalResult。
+func (e *Engine) newEvalResult(ruleCap int) *EvalResult {
+	if e.poolEnabled {
+		r := acquireResult()
+		r.MatchedRules = r.MatchedRules[:0]
+		if ruleCap > cap(r.MatchedRules) {
+			r.MatchedRules = make([]*core.Rule, 0, ruleCap)
+		}
+		return r
+	}
+	return &EvalResult{
+		MatchedRules: make([]*core.Rule, 0, ruleCap),
+	}
+}
+
+// ReleaseResult 归还 EvalResult 到对象池（仅 poolEnabled 时有效）。
+func (e *Engine) ReleaseResult(r *EvalResult) {
+	if e.poolEnabled {
+		releaseResult(r)
+	}
+}
+
+// evalChainPooled 池化单次评估（内部使用）。
+func (e *Engine) evalChainPooled(ctx context.Context, chainID string, data core.DataContext) (*EvalResult, error) {
+	return e.evalChain(ctx, chainID, data)
+}

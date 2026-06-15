@@ -50,7 +50,7 @@ type Snapshot struct {
 //   - 应用层希望快速接入但不想引入 Prometheus 等外部依赖的场景
 //   - 单元测试断言指标
 type MemorySink struct {
-	mu sync.Mutex
+	mu sync.RWMutex
 	// EvalTotal 按 (chainID, result) 计数
 	EvalTotal map[string]map[string]int64
 	// ActionTotal 按 (chainID, actionType, result) 计数
@@ -89,8 +89,8 @@ func NewMemorySink() *MemorySink {
 
 // Snapshot 返回所有字段的一致性快照（用于并发读）
 func (c *MemorySink) Snapshot() Snapshot {
-	c.mu.Lock()
-	defer c.mu.Unlock()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
 	snap := Snapshot{
 		LoadedChains: c.LoadedChains,
 		ActiveEval:   c.ActiveEval,

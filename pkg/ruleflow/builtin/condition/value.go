@@ -4,6 +4,7 @@ package condition
 import (
 	"context"
 	"fmt"
+	"sort"
 
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
 )
@@ -42,23 +43,24 @@ func (c *ValueRangeCondition) Description() string {
 
 // ValueInCondition 离散值匹配条件
 // 判断值是否在指定的离散值列表中
+// 使用预排序 + 二分查找，避免 float64 作为 map key 的 NaN/精度问题
 type ValueInCondition struct {
-	IDValue  string
-	Values   []float64
-	valueSet map[float64]struct{} // 预编译哈希集，O(1) 查找
+	IDValue      string
+	Values       []float64
+	sortedValues []float64 // 预排序，用于二分查找
 }
 
 func NewValueInCondition(id string, values []float64) *ValueInCondition {
-	valueSet := make(map[float64]struct{}, len(values))
-	for _, v := range values {
-		valueSet[v] = struct{}{}
-	}
-	return &ValueInCondition{IDValue: id, Values: values, valueSet: valueSet}
+	sorted := make([]float64, len(values))
+	copy(sorted, values)
+	sort.Float64s(sorted)
+	return &ValueInCondition{IDValue: id, Values: values, sortedValues: sorted}
 }
 
 func (c *ValueInCondition) Evaluate(_ context.Context, data core.DataContext) bool {
-	_, found := c.valueSet[data.Value()]
-	return found
+	v := data.Value()
+	idx := sort.SearchFloat64s(c.sortedValues, v)
+	return idx < len(c.sortedValues) && c.sortedValues[idx] == v
 }
 
 func (c *ValueInCondition) ID() string          { return c.IDValue }

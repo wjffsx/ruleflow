@@ -53,7 +53,7 @@ func (c *RateLimitCondition) Evaluate(_ context.Context, data core.DataContext) 
 	}
 
 	currentTs := data.Timestamp()
-	elapsed := float64(currentTs - prevTs) / 1000.0 // 毫秒转秒
+	elapsed := float64(currentTs-prevTs) / 1000.0 // 毫秒转秒
 
 	if elapsed <= 0 {
 		return false // 时间戳异常
