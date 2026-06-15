@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
-	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes"
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/nodes/util"
 )
 
