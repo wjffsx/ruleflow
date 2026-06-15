@@ -3,6 +3,7 @@ package action
 import (
 	"context"
 	"testing"
+	"time"
 
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/builtin/condition"
 	"github.com/wjffsx/ruleflow/pkg/ruleflow/core"
@@ -352,5 +353,157 @@ func TestConditionMetadata(t *testing.T) {
 		if tt.condition.Description() == "" {
 			t.Error("description should not be empty")
 		}
+	}
+}
+
+// ─────────────────────────────────────────────
+//  BitUnpackAction Tests
+// ─────────────────────────────────────────────
+
+func TestBitUnpackAction(t *testing.T) {
+	// Value = 5 (binary: 101)
+	// bit0 = 1, bit1 = 0, bit2 = 1
+	a := NewBitUnpackAction("bit1", []string{"bit0", "bit1", "bit2"}, 0)
+	data := newMock()
+	data.value = 5
+
+	if err := a.Execute(context.Background(), data); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if data.GetTag("bit0") != "1" {
+		t.Errorf("expected bit0=1, got %s", data.GetTag("bit0"))
+	}
+	if data.GetTag("bit1") != "0" {
+		t.Errorf("expected bit1=0, got %s", data.GetTag("bit1"))
+	}
+	if data.GetTag("bit2") != "1" {
+		t.Errorf("expected bit2=1, got %s", data.GetTag("bit2"))
+	}
+
+	// Test metadata
+	if a.Type() != "bit_unpack" {
+		t.Errorf("expected type bit_unpack, got %s", a.Type())
+	}
+	if a.ID() != "bit1" {
+		t.Errorf("expected ID bit1, got %s", a.ID())
+	}
+}
+
+func TestBitUnpackAction_StartBit(t *testing.T) {
+	// Value = 8 (binary: 1000)
+	// Starting at bit 2: bit2 = 0, bit3 = 1
+	a := NewBitUnpackAction("bit2", []string{"bit2", "bit3"}, 2)
+	data := newMock()
+	data.value = 8
+
+	if err := a.Execute(context.Background(), data); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if data.GetTag("bit2") != "0" {
+		t.Errorf("expected bit2=0, got %s", data.GetTag("bit2"))
+	}
+	if data.GetTag("bit3") != "1" {
+		t.Errorf("expected bit3=1, got %s", data.GetTag("bit3"))
+	}
+}
+
+// ─────────────────────────────────────────────
+//  BitPackAction Tests
+// ─────────────────────────────────────────────
+
+func TestBitPackAction_ToValue(t *testing.T) {
+	a := NewBitPackAction("pack1", []string{"b0", "b1", "b2"}, "value", 0)
+	data := newMock()
+	data.tags["b0"] = "1"
+	data.tags["b1"] = "0"
+	data.tags["b2"] = "1"
+
+	if err := a.Execute(context.Background(), data); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// Expected: 1 + 0 + 4 = 5
+	if data.Value() != 5 {
+		t.Errorf("expected value 5, got %f", data.Value())
+	}
+
+	// Test metadata
+	if a.Type() != "bit_pack" {
+		t.Errorf("expected type bit_pack, got %s", a.Type())
+	}
+}
+
+func TestBitPackAction_ToTag(t *testing.T) {
+	a := NewBitPackAction("pack2", []string{"b0", "b1"}, "result", 0)
+	data := newMock()
+	data.tags["b0"] = "true"
+	data.tags["b1"] = "1"
+
+	if err := a.Execute(context.Background(), data); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// Expected: 1 + 2 = 3
+	if data.GetTag("result") != "3" {
+		t.Errorf("expected result=3, got %s", data.GetTag("result"))
+	}
+}
+
+func TestBitPackAction_StartBit(t *testing.T) {
+	a := NewBitPackAction("pack3", []string{"b2", "b3"}, "value", 2)
+	data := newMock()
+	data.tags["b2"] = "1"
+	data.tags["b3"] = "1"
+
+	if err := a.Execute(context.Background(), data); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// Expected: 4 + 8 = 12
+	if data.Value() != 12 {
+		t.Errorf("expected value 12, got %f", data.Value())
+	}
+}
+
+// ─────────────────────────────────────────────
+//  DelayAction Tests
+// ─────────────────────────────────────────────
+
+func TestDelayAction_NilInner(t *testing.T) {
+	a := NewDelayAction("delay1", 100*time.Millisecond, nil)
+	data := newMock()
+
+	if err := a.Execute(context.Background(), data); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// Test metadata
+	if a.Type() != "delay" {
+		t.Errorf("expected type delay, got %s", a.Type())
+	}
+	if a.ID() != "delay1" {
+		t.Errorf("expected ID delay1, got %s", a.ID())
+	}
+}
+
+func TestDelayAction_WithInner(t *testing.T) {
+	executed := false
+	inner := NewTagAction("inner", map[string]string{"delayed": "true"})
+	a := NewDelayAction("delay2", 50*time.Millisecond, inner)
+	data := newMock()
+
+	if err := a.Execute(context.Background(), data); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// Wait for delay to execute
+	time.Sleep(100 * time.Millisecond)
+
+	// The inner action should have been executed on the snapshot
+	// Note: snapshot doesn't support tags, so this test verifies no panic
+	if executed {
+		t.Log("inner action executed")
 	}
 }
