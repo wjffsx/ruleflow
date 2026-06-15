@@ -37,6 +37,7 @@ type benchDataPoint struct {
 
 func (d *benchDataPoint) DeviceID() string                      { return d.deviceID }
 func (d *benchDataPoint) PointName() string                     { return d.pointName }
+func (d *benchDataPoint) SetPointName(name string)              { d.pointName = name }
 func (d *benchDataPoint) PointType() string                     { return d.pointType }
 func (d *benchDataPoint) FQN() string                           { return d.fqn }
 func (d *benchDataPoint) Value() float64                        { return d.value }
