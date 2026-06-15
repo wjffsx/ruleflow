@@ -1,10 +1,10 @@
 module github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/prometheus
 
-go 1.25.0
+go 1.24
 
 require (
 	github.com/prometheus/client_golang v1.19.0
-	github.com/wjffsx/ruleflow v0.1.0
+	github.com/wjffsx/ruleflow v0.1.2
 )
 
 require (

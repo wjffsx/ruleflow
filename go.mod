@@ -1,6 +1,6 @@
 module github.com/wjffsx/ruleflow
 
-go 1.24
+go 1.25.0
 
 replace (
 	github.com/wjffsx/ruleflow/pkg/ruleflow/adapter => ./pkg/ruleflow/adapter
@@ -12,7 +12,7 @@ replace (
 )
 
 require (
-	github.com/wjffsx/ruleflow/pkg/ruleflow/config v0.1.0
+	github.com/wjffsx/ruleflow/pkg/ruleflow/config v0.1.2
 	google.golang.org/grpc v1.81.1
 )
 

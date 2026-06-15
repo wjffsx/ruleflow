@@ -1,9 +1,9 @@
 module github.com/wjffsx/ruleflow/pkg/ruleflow/contrib/otel
 
-go 1.25.0
+go 1.24
 
 require (
-	github.com/wjffsx/ruleflow v0.1.0
+	github.com/wjffsx/ruleflow v0.1.2
 	go.opentelemetry.io/otel/trace v1.43.0
 )
 

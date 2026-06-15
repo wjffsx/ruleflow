@@ -1,10 +1,10 @@
 module github.com/wjffsx/ruleflow/pkg/ruleflow/config
 
-go 1.25.0
+go 1.24
 
 require (
 	github.com/fsnotify/fsnotify v1.7.0
-	github.com/wjffsx/ruleflow v0.1.0
+	github.com/wjffsx/ruleflow v0.1.2
 	gopkg.in/yaml.v3 v3.0.1
 )
 
