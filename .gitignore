@@ -3,6 +3,7 @@
 *.out
 coverage.txt
 coverage.html
+coverage/
 bench.txt
 go.sum
 
