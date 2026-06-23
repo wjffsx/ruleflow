@@ -106,5 +106,61 @@ func ActionMetaList() []nodes.ComponentMeta {
 				{Name: "params", Label: "策略参数", Type: "map", Required: false},
 			},
 		},
+		// ── 新增告警检测节点 ──
+		{
+			Type: "alarm_emit", Label: "告警发射", LabelEn: "Alarm Emit",
+			Category: "route_check", Icon: "alert",
+			Description: "告警发射：在 DataContext 上设置告警 Tag，供后续 AlarmManager 消费",
+			Fields: []nodes.ComponentField{
+				{Name: "severity", Label: "严重级别", Type: "string", Required: false, Default: "warning"},
+				{Name: "source_type", Label: "来源类型", Type: "string", Required: false, Default: "device"},
+				{Name: "message_template", Label: "消息模板", Type: "string", Required: false},
+			},
+		},
+	}
+}
+
+// ConditionMetaList returns metadata for all ext condition nodes.
+func ConditionMetaList() []nodes.ComponentMeta {
+	return []nodes.ComponentMeta{
+		{
+			Type: "threshold_detect", Label: "阈值检测", LabelEn: "Threshold Detect",
+			Category: "route_check", Icon: "threshold",
+			Description: "阈值检测：比较值与阈值，支持 gt/lt/gte/lte/eq/neq/outside_range/inside_range 和持续时间",
+			Fields: []nodes.ComponentField{
+				{Name: "operator", Label: "运算符", Type: "string", Required: true},
+				{Name: "value", Label: "阈值", Type: "number", Required: false},
+				{Name: "min_value", Label: "最小值(范围)", Type: "number", Required: false},
+				{Name: "duration", Label: "持续时间", Type: "string", Required: false, Default: "0s"},
+			},
+		},
+		{
+			Type: "status_detect", Label: "状态检测", LabelEn: "Status Detect",
+			Category: "route_check", Icon: "status",
+			Description: "状态检测：检测数据点值是否匹配期望的状态值，支持去抖窗口",
+			Fields: []nodes.ComponentField{
+				{Name: "expected_value", Label: "期望值", Type: "string", Required: true},
+				{Name: "debounce", Label: "去抖窗口", Type: "string", Required: false},
+			},
+		},
+		{
+			Type: "rate_detect", Label: "变化率检测", LabelEn: "Rate Detect",
+			Category: "route_check", Icon: "speed",
+			Description: "变化率检测：检测数据点值在时间窗口内的变化率是否超过阈值",
+			Fields: []nodes.ComponentField{
+				{Name: "max_rate", Label: "最大变化率", Type: "number", Required: true},
+				{Name: "window", Label: "检测窗口", Type: "string", Required: false, Default: "60s"},
+				{Name: "direction", Label: "方向", Type: "string", Required: false, Default: "both"},
+			},
+		},
+		{
+			Type: "composite_detect", Label: "复合条件检测", LabelEn: "Composite Detect",
+			Category: "route_check", Icon: "composite",
+			Description: "复合条件检测：AND/OR 逻辑组合多个子条件",
+			Fields: []nodes.ComponentField{
+				{Name: "logic", Label: "逻辑", Type: "string", Required: false, Default: "and"},
+				{Name: "conditions", Label: "子条件列表", Type: "array", Required: true},
+			},
+		},
 	}
 }
